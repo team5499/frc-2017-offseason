@@ -1,6 +1,6 @@
 package org.team5499.robots.frc2017;
 
-import com.ctre.CANTalon;
+import com.ctre.MotorControl.CANTalon;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Robot extends IterativeRobot{
