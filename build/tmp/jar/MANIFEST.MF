@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Robot-Class: org.team5499.robots.frc2017.Robot
-Main-Class: edu.wpi.first.wpilibj.RobotBase
-
