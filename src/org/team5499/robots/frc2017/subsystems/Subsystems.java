@@ -9,6 +9,8 @@ public class Subsystems {
     public static Climber climber;
     public static Gearmech gearmech;
     public static Inputs inputs;
+    public static Encoders encoders;
+    public static LED led;
 
 
     public Subsystems() {
@@ -16,6 +18,8 @@ public class Subsystems {
         climber = new Climber();
         gearmech = new Gearmech();
         inputs = new Inputs();
+        encoders = new Encoders();
+        led = new LED();
     }
 
 }

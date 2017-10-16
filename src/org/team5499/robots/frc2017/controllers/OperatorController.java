@@ -5,7 +5,7 @@ import org.team5499.robots.frc2017.subsystems.Subsystems;
 public class OperatorController {
 
     public OperatorController() {
-
+        Subsystems.led.setRGB(Subsytems.led.white, true, true);
     }
 
     public void Start() {
