@@ -2,7 +2,6 @@ package org.team5499.robots.frc2017;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.team5499.robots.frc2017.controllers.*;
-import org.team5499.robots.frc2017.RobotInit;
 
 public class Robot extends IterativeRobot {
 
