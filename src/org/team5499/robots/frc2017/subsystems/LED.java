@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import edu.wpi.first.wpilibj.Timer;
 
 public class LED {
-    private Timer timer;
+    // private Timer timer;
 
     private Color currentColor;
     private Color prevColor;
@@ -22,7 +22,7 @@ public class LED {
     
 
     public LED() {
-        timer.start();
+        // timer.start();
         redController = new DigitalOutput(Reference.red_port);
         greenController = new DigitalOutput(Reference.green_port);
         blueController = new DigitalOutput(Reference.blue_port);
@@ -34,7 +34,9 @@ public class LED {
 
         current_time_millis = 0;
         last_time_millis = 0;
-    
+        
+        colorSequence.add(red);
+        colorSequence.add(green);
     }
 
     private void updateController(Color color) {
@@ -52,13 +54,18 @@ public class LED {
 
     public void rotateColors(int interval) {
         //Interval is time between colors in milliseconds
+        current_time_millis = Timer.getFPGATimestamp() * 1000;
         
-
+        if(current_time_millis % interval <= 50 && current_time_millis % interval >= 0) {
+            sequenceIndex = (sequenceIndex <= colorSequence.size() ? sequenceIndex += 1 : 0);
+            currentColor = colorSequence.get(sequenceIndex);
+            setRGB(currentColor, true, true);
+        }
     }
 
     public void flash(Color flashColor) {
-        prevColor = currentColor;
         setRGB(flashColor, true, true);
+        setRGB(currentColor, true, true);
     }
 
 }

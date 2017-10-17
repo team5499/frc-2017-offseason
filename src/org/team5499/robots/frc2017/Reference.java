@@ -25,7 +25,6 @@ public class Reference {
     public static final int green_port = 5;
     public static final int blue_port = 6;
 
-
     // Input Ports
     public static final int driver_port = 0;
     public static final int codriver_port = 1;
