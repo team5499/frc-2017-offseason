@@ -11,6 +11,10 @@ public class Subsystems {
     public static Inputs inputs;
     public static Encoders encoders;
     public static LED led;
+    public static PID leftPID;
+    public static PID rightPID;
+    public static PID anglePID;
+    public static Angle angle;
 
 
     public Subsystems() {
@@ -20,5 +24,9 @@ public class Subsystems {
         inputs = new Inputs();
         encoders = new Encoders();
         led = new LED();
+        leftPID = new PID(0, 0, 0, 1);
+        rightPID = new PID(0, 0, 0, 1);
+        anglePID = new PID(0, 0, 0, 1);
+        angle = new Angle();
     }
 }
