@@ -37,6 +37,7 @@ dependencies {
   runtime "org.opencv:opencv-natives:$OpenCV_version:linux-arm"
   runtime "org.opencv:opencv-jni:$OpenCV_version:linux-arm"
   runtime "edu.wpi.cscore.java:cscore:$CameraServer_version:athena-uberzip@zip"
+  runtime "thirdparty.frc.ctre:Toolsuite-Zip:$CTREToolsuite_version@zip"
 }
 
 jar {
