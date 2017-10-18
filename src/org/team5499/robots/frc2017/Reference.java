@@ -44,12 +44,12 @@ public class Reference {
     public static final double center_wheel_dist_inches = 25.0;
 
     // PID constants
-    public static double kP = 0;
-    public static double kI = 0;
-    public static double kD = 0;
-    public static double kAP = 0;
-    public static double kAI = 0;
-    public static double kAD = 0;
+    public static double kP = 0.04;
+    public static double kI = 0.0;
+    public static double kD = 0.01;
+    public static double kAP = 0.035;
+    public static double kAI = 0.0;
+    public static double kAD = 0.0;
 
     public static void initPIDVariables() {
         // Need to find a Json parser
