@@ -18,7 +18,10 @@ public class AutoController {
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         center.addCommand(new DriveCommand(2, -40));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
+
         // Left auto
+        left.addCommand(new DriveCommand(4, 60));
+        left.addCommand(new TurnCommand(6, 45));
         
 
         // Right auto
