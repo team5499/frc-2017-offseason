@@ -1,0 +1,13 @@
+// Data variables
+
+{
+ //Drive PID constants
+    "kP" : 0,
+    "kI" : 0,
+    "kF" : 0,
+
+ //Angle PID constants 
+    "kAP" : 0,
+    "kAI" : 0,
+    "kAD" : 0
+}
