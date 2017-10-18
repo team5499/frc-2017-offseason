@@ -1,10 +1,10 @@
 # exlcude build folder
 build/
 # exclude bin folder
-bin/
+# bin/
 # exclude dot files
-.project
-.classpath
-.vscode/
-.settings/
-.gradle/
+# .project
+# .classpath
+# .vscode/
+# .settings/
+# .gradle/
