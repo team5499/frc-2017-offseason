@@ -2,6 +2,9 @@
 build/
 # exclude bin folder
 bin/
+# exclude build dependent files for dashboard
+dashboard/dist/
+dashboard/node_modules/
 # exclude dot files
 .project
 .classpath
