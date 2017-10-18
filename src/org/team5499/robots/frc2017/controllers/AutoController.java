@@ -20,11 +20,15 @@ public class AutoController {
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Left auto
-        left.addCommand(new DriveCommand(4, 60));
-        left.addCommand(new TurnCommand(6, 45));
-        
+        //left.addCommand(new DriveCommand(4, 60));
+        //left.addCommand(new TurnCommand(6, 45));
+        left.addCommand(new DoNothingCommand(2));
 
         // Right auto
+        right.addCommand(new DoNothingCommand(2));
+
+        // Test
+        test.addCommand(new DoNothingCommand(2));
 
         autoChoice = 0;
     }
