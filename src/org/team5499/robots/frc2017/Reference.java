@@ -36,12 +36,25 @@ public class Reference {
     public static final double rollerSpeed = 0.9;
     public static final double climbSpeed = 0.99;
     public static final double slowMult = 0.3;
+    public static final double maxAutoSpeed = 0.4;
 
     // Constants
     public static final double PI = 3.1414926;
     public static final double distance_per_pulse = (PI * 4.0) / 256.0;
+    public static final double center_wheel_dist_inches = 25.0;
 
-    //PID constants
-    
+    // PID constants
+    public static double kP = 0;
+    public static double kI = 0;
+    public static double kD = 0;
+    public static double kAP = 0;
+    public static double kAI = 0;
+    public static double kAD = 0;
+
+    public static void initPIDVariables() {
+        // Need to find a Json parser
+    }
+
+
 
 }
