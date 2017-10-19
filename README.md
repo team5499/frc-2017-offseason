@@ -1,9 +1,9 @@
 # Java Codebase
 
 ## Todo list
-    Markup : - [ ] Improve Smart Dashboard
-             - [ ] Json file parsing
-             - [ ] Autos 
+    - [ ] Improve Smart Dashboard
+    - [ ] Json file parsing
+    - [ ] Autos 
 
 ## Smart Dashboard
 
