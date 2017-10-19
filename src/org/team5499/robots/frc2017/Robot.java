@@ -20,6 +20,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         Subsystems.encoders.reset();
         //Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        Reference.initPIDVariables();
     }
 
     @Override
