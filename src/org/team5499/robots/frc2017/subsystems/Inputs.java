@@ -19,6 +19,7 @@ public class Inputs {
     }
 
     public double getLeftStick() {
+        System.out.println(driver.getY(Hand.kLeft));
         return driver.getY(Hand.kLeft);
     }
 

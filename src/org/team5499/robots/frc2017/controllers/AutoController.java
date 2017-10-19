@@ -2,7 +2,11 @@ package org.team5499.robots.frc2017.controllers;
 
 import org.team5499.robots.frc2017.subsystems.Gearmech;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
-import org.team5499.robots.frc2017.Commands.*;
+import org.team5499.robots.frc2017.Commands.DriveCommand;
+import org.team5499.robots.frc2017.Commands.GearmechCommand;
+import org.team5499.robots.frc2017.Commands.DoNothingCommand;
+import org.team5499.robots.frc2017.Commands.TurnCommand;
+import org.team5499.robots.frc2017.Commands.Routine;
 
 
 public class AutoController {
@@ -13,15 +17,19 @@ public class AutoController {
 
     public AutoController() {
 
-        // Center auto 
+        center = new Routine();
+        left = new Routine();
+        right = new Routine();
+        test = new Routine();
+        //enter auto
         center.addCommand(new DriveCommand(4,80));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         center.addCommand(new DriveCommand(2, -40));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Left auto
-        //left.addCommand(new DriveCommand(4, 60));
-        //left.addCommand(new TurnCommand(6, 45));
+        left.addCommand(new DriveCommand(4, 60));
+        left.addCommand(new TurnCommand(6, 45));
         left.addCommand(new DoNothingCommand(2));
 
         // Right auto

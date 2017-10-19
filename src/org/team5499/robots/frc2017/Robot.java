@@ -18,7 +18,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         Subsystems.encoders.reset();
-        Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        //Subsystems.led.setRGB(Subsystems.led.white, true, true);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
     
 	@Override
 	public void disabledPeriodic() {
-        Subsystems.led.rotateColors(400);
+        //Subsystems.led.rotateColors(400);
         Subsystems.encoders.reset();
         Subsystems.angle.reset();
     }
@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        //Subsystems.led.setRGB(Subsystems.led.white, true, true);
         operatorController.Start();
     }
 

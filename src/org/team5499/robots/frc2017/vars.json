@@ -2,12 +2,12 @@
 
 {
  //Drive PID constants
-    "kP" : 0,
-    "kI" : 0,
-    "kF" : 0,
+    "kP" : 0.04,
+    "kI" : 0.0,
+    "kF" : 0.0,
 
  //Angle PID constants 
-    "kAP" : 0,
-    "kAI" : 0,
-    "kAD" : 0
+    "kAP" : 0.045,
+    "kAI" : 0.01,
+    "kAD" : 0.0
 }

@@ -1,8 +1,23 @@
 package org.team5499.robots.frc2017;
 
 import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+import java.io.FileReader;
 
 public class Reference {
+
+    private static Gson gson;
+    private static final String varFilePath = "vars.json";
+    private static JsonReader jreader;
+
+    private Reference() {
+        gson = new GsonBuilder().create();
+        try {
+            jreader = new JsonReader(new FileReader(varFilePath));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // Talon Ports
     public static final int left1_port = 1;
@@ -10,11 +25,11 @@ public class Reference {
     public static final int right1_port = 3;
     public static final int right2_port = 4;
 
-    public static final int climb1_port = 5;
-    public static final int climb2_port = 6;
+    public static final int climb1_port = 7;
+    public static final int climb2_port = 8;
 
-    public static final int arm_port = 7;
-    public static final int roller_port = 8;
+    public static final int arm_port = 5;
+    public static final int roller_port = 6;
 
     // Encoder Ports
     public static final int rightEncoder_port1 = 0;
@@ -28,8 +43,8 @@ public class Reference {
     public static final int blue_port = 6;
 
     // Input Ports
-    public static final int driver_port = 0;
-    public static final int codriver_port = 1;
+    public static final int driver_port = 1;
+    public static final int codriver_port = 0;
     public static final int wheel_port = 2;
     public static final int joystick_port = 3;
 
@@ -46,19 +61,19 @@ public class Reference {
     public static final double center_wheel_dist_inches = 25.0;
 
     // PID constants
-    public static double kP = 0.04;
+    public static double kP = 0.0;
     public static double kI = 0.0;
-    public static double kD = 0.01;
-    public static double kAP = 0.035;
+    public static double kD = 0.0;
+    public static double kAP = 0.0;
     public static double kAI = 0.0;
     public static double kAD = 0.0;
 
     public static void initPIDVariables() {
-
-        
-        // Need to find a Json parser
+        kP = gson.fromJson("kP", double.class);
+        kI = gson.fromJson("kI", double.class);
+        kD = gson.fromJson("kD", double.class);
+        kAP = gson.fromJson("kAP", double.class);
+        kAI = gson.fromJson("kAI", double.class);
+        kAD = gson.fromJson("kAD", double.class);
     }
-
-
-
 }
