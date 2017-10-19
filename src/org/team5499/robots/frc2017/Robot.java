@@ -1,6 +1,7 @@
 package org.team5499.robots.frc2017;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team5499.robots.frc2017.controllers.*;
 import org.team5499.robots.frc2017.subsystems.*;
 
@@ -29,6 +30,9 @@ public class Robot extends IterativeRobot {
 
     @Override
 	public void disabledInit() {
+        Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
+        Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
+        Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
         Subsystems.encoders.reset();
         Subsystems.angle.reset();
         autoController.reset();
@@ -36,7 +40,9 @@ public class Robot extends IterativeRobot {
     
 	@Override
 	public void disabledPeriodic() {
-        //Subsystems.led.rotateColors(400);
+        Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
+        Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
+        Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
         Subsystems.encoders.reset();
         Subsystems.angle.reset();
     }
@@ -55,6 +61,7 @@ public class Robot extends IterativeRobot {
     public void teleopInit() {
         //Subsystems.led.setRGB(Subsystems.led.white, true, true);
         operatorController.Start();
+        SmartDashboard.putBoolean("time_running", true);
     }
 
     @Override

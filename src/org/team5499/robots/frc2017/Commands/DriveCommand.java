@@ -5,6 +5,7 @@ import org.team5499.robots.frc2017.Commands.GenericCommand;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveCommand extends GenericCommand {
     private double m_setpoint, m_start_time;
@@ -52,6 +53,13 @@ public class DriveCommand extends GenericCommand {
     @Override
     public boolean isFinished() {
         return super.isFinished();
+    }
+
+    public void updateSmartDash() {
+        SmartDashboard.putNumber("auto/curr_time", Timer.getFPGATimestamp() - m_start_time);
+        SmartDashboard.putNumber("auto/left_error", Subsystems.leftPID.getError());
+        SmartDashboard.putNumber("auto/right_error", Subsystems.rightPID.getError());
+        SmartDashboard.putNumber("auto/angle_error", Subsystems.anglePID.getError());
     }
 
     @Override

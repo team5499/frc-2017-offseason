@@ -55,9 +55,14 @@ public class PID {
         return sp - pv;
     }
 
-    public double getRate()
-    {
+    public double getRate(){
         return (pv - prev_pv)/(Timer.getFPGATimestamp() - last_input_time);
+    }
+
+    public void setPID(double pVal, double iVal, double dVal) {
+        kP = pVal;
+        kI = iVal;
+        kD = dVal;
     }
 
     public void reset() {
