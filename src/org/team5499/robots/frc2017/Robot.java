@@ -19,14 +19,14 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         Subsystems.encoders.reset();
-        //Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        Subsystems.led.setRGB(Subsystems.led.white, true, true);
         Reference.initPIDVariables();
     }
 
     @Override
     public void robotPeriodic() {
         Subsystems.angle.Handle(Subsystems.encoders.getLeftDistance(), Subsystems.encoders.getRightDistance());
-        // Subsystems.led.handle();
+        Subsystems.led.handle();
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        //Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        Subsystems.led.setRGB(Subsystems.led.off, true, true);
         operatorController.Start();
         SmartDashboard.putBoolean("time_running", true);
     }

@@ -77,6 +77,10 @@ public class Reference {
 
     public static void initPIDVariables() {
         kP = jobject.get("kP").getAsDouble();
-        System.out.println(kP);
+        kI = jobject.get("kI").getAsDouble();
+        kD = jobject.get("kD").getAsDouble();
+        kAP = jobject.get("kAP").getAsDouble();
+        kAI = jobject.get("kAI").getAsDouble();
+        kAD = jobject.get("kAD").getAsDouble();
     }
 }

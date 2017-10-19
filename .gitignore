@@ -5,6 +5,7 @@ bin/
 # exclude build dependent files for dashboard
 dashboard/dist/
 dashboard/node_modules/
+node_modules/
 # exclude dot files
 # .project
 # .classpath
