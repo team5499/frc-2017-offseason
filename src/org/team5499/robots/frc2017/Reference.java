@@ -6,17 +6,24 @@ import java.io.FileReader;
 
 public class Reference {
 
-    private static Gson gson;
-    private static final String varFilePath = "vars.json";
+    private static Gson gson = new GsonBuilder().create();
+    private static final String varFilePath = "/home/lvuser/vars.json";
     private static JsonReader jreader;
+    private static JsonParser jparser;
+    private static JsonElement ptree;
+    private static JsonObject jobject;
 
-    private Reference() {
+    static {
         gson = new GsonBuilder().create();
         try {
             jreader = new JsonReader(new FileReader(varFilePath));
         } catch(Exception e) {
             e.printStackTrace();
         }
+
+        jparser = new JsonParser();
+        ptree = jparser.parse(jreader);
+        jobject = ptree.getAsJsonObject();
     }
 
     // Talon Ports
@@ -69,11 +76,7 @@ public class Reference {
     public static double kAD = 0.0;
 
     public static void initPIDVariables() {
-        kP = gson.fromJson("kP", double.class);
-        kI = gson.fromJson("kI", double.class);
-        kD = gson.fromJson("kD", double.class);
-        kAP = gson.fromJson("kAP", double.class);
-        kAI = gson.fromJson("kAI", double.class);
-        kAD = gson.fromJson("kAD", double.class);
+        kP = jobject.get("kP").getAsDouble();
+        System.out.println(kP);
     }
 }
