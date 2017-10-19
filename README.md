@@ -1,10 +1,27 @@
 # Java Codebase
 
 ## Todo list
-    [] Improve Smart Dashboard
-    [] Json file parsing
-    [] Autos
-    [] Fix LED class
+* Improve Smart Dashboard
+    * Add an interface for changing constants on the robot
+    * Add a camera feed
+    * Add a heat map for the robot position
+    * Add a tab interface
+        * Driving tab
+        * PID tab
+        * Debugging/console tab
+        * Variables/tuning tab
+* Json file parsing
+    * Reading the json variables(done)
+    * writing to the json file
+    * syncing the file between computers
+* Autos
+    * Test the center auto for reliability
+    * Write a turn command
+    * Tune the turn command
+    * Write the left and right auto
+    * Tune the left and right auto
+* Fix LED class
+    * Ben
 
 ## Smart Dashboard
 
