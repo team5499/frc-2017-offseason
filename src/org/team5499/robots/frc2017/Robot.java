@@ -30,6 +30,7 @@ public class Robot extends IterativeRobot {
 
     @Override
 	public void disabledInit() {
+        Reference.initPIDVariables();
         Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
@@ -40,6 +41,7 @@ public class Robot extends IterativeRobot {
     
 	@Override
 	public void disabledPeriodic() {
+        Reference.initPIDVariables();
         Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);

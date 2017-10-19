@@ -15,8 +15,10 @@ public class LED {
     public ArrayList<Color> colorSequence = new ArrayList<>();
     public int sequenceIndex = -1;
 
-    public Color red, green, blue, white;
+    public Color red, green, blue, white, off;
+    private int flashSequence;;
 
+    double startTime;
     double current_time_millis;
     double last_time_millis;
     
@@ -26,11 +28,21 @@ public class LED {
         redController = new DigitalOutput(Reference.red_port);
         greenController = new DigitalOutput(Reference.green_port);
         blueController = new DigitalOutput(Reference.blue_port);
+
+        redController.enablePWM(0);
+        redController.setPWMRate(100);
+        greenController.enablePWM(0);
+        greenController.setPWMRate(100);
+        blueController.enablePWM(0);
+        blueController.setPWMRate(100);
+
         red = new Color(255, 0, 0);
         green = new Color(0, 255, 0);
         blue = new Color(0, 0, 255);
         white = new Color(255, 255, 255);
+        off = new Color(0, 0, 0);
         sequenceIndex = 0;
+        flashSequence = -1;
 
         current_time_millis = 0;
         last_time_millis = 0;
@@ -63,9 +75,29 @@ public class LED {
         }
     }
 
+    public void handle() {
+        if(flashSequence != -1) {
+            if(Timer.getFPGATimestamp() - startTime > 0.3) {
+                flashSequence++;
+                startTime = Timer.getFPGATimestamp();
+            }
+            if(flashSequence % 2 == 0) {
+                setRGB(currentColor, true, false);
+            } else {
+                setRGB(off, true, false);
+            }
+            if(flashSequence > 4) {
+                flashSequence = -1;
+                setRGB(off, true, true);
+            }
+        }
+    }
+
     public void flash(Color flashColor) {
-        setRGB(flashColor, true, true);
-        setRGB(currentColor, true, true);
+        prevColor = currentColor;
+        setRGB(flashColor, false, true);
+        flashSequence = 0;
+        startTime = Timer.getFPGATimestamp();
     }
 
 }

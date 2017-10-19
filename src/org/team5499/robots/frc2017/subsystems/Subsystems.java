@@ -18,7 +18,5 @@ public class Subsystems {
     public static Angle angle = new Angle();
     public static BuiltInAccelerometer accel = new BuiltInAccelerometer();
 
-    public Subsystems() {
-
-    }
+    public Subsystems() {}
 }

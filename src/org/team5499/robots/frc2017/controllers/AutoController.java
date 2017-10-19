@@ -2,9 +2,7 @@ package org.team5499.robots.frc2017.controllers;
 
 import org.team5499.robots.frc2017.subsystems.Gearmech;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.team5499.robots.frc2017.Commands.DriveCommand;
 import org.team5499.robots.frc2017.Commands.GearmechCommand;
 import org.team5499.robots.frc2017.Commands.DoNothingCommand;
