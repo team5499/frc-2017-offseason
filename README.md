@@ -1,7 +1,11 @@
 # Java Codebase
 
 ## Todo list
-* Improve Smart Dashboard
+* Document code
+    * Deoxygen
+    * Use style-guide provided 
+
+* Improve Smart Dashboards
     * Add an interface for changing constants on the robot
     * Add a camera feed
     * Add a heat map for the robot position
