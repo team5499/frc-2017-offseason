@@ -1,5 +1,10 @@
 # Java Codebase
 
+## Todo list
+    [ ] Improve Smart Dashboard
+    [ ] Json file parsing
+    [ ] Autos 
+
 ## Smart Dashboard
 
 Based on [`FRC Dashboard`](https://frcdashboard.github.io/).
