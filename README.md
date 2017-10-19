@@ -1,9 +1,10 @@
 # Java Codebase
 
 ## Todo list
-    - [ ] Improve Smart Dashboard
-    - [ ] Json file parsing
-    - [ ] Autos 
+    [] Improve Smart Dashboard
+    [] Json file parsing
+    [] Autos
+    [] Fix LED class
 
 ## Smart Dashboard
 
