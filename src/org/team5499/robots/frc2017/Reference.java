@@ -52,7 +52,7 @@ public class Reference {
     public static final double armMult = 0.5;
     public static final double rollerSpeed = 0.9;
     public static final double climbSpeed = 0.99;
-    public static final double slowMult = 0.3;
+    public static final double slowMult = 0.5;
     public static final double maxAutoSpeed = 0.4;
 
     // Constants

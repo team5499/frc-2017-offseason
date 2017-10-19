@@ -17,7 +17,7 @@ public class Inputs {
         wheel = new Joystick(Reference.wheel_port);
         stick = new Joystick(Reference.joystick_port);
     }
-
+    
     public double getLeftStick() {
         System.out.println(driver.getY(Hand.kLeft));
         return driver.getY(Hand.kLeft);
@@ -28,9 +28,9 @@ public class Inputs {
     }
 
     public double isSlow() {
-        return (driver.getTrigger(Hand.kRight) ? Reference.slowMult
-        : driver.getTrigger(Hand.kLeft) ? Reference.slowMult
-        : 0.0);
+        return (driver.getTrigger(Hand.kRight) ? Reference.slowMult // Kinda Slow
+        : driver.getTrigger(Hand.kLeft) ? Reference.slowMult / 2 // Really Slow
+        : 1.0); // Normal Speed / Not Slow
     }
 
     public double getClimb() {
