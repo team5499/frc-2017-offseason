@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Inputs {
 
     public XboxController driver, codriver;
-    Joystick wheel, stick;
+    public Joystick wheel, throttle;
 
 
     public Inputs() {
         driver = new XboxController(Reference.driver_port);
         codriver = new XboxController(Reference.codriver_port);
         wheel = new Joystick(Reference.wheel_port);
-        stick = new Joystick(Reference.joystick_port);
+        throttle = new Joystick(Reference.joystick_port);
     }
     
     public double getLeftStick() {
@@ -35,9 +35,9 @@ public class Inputs {
 
     public double getClimb() {
          double a = 0.0;
-         a = (codriver.getAButton()) ? Reference.climbSpeed
-         : codriver.getBButton() ? -Reference.climbSpeed 
-          : 0.0;
+         a = (codriver.getAButton()) ? -Reference.climbSpeed
+         : codriver.getBButton() ? Reference.climbSpeed 
+         : 0.0;
          return a;
     }
 
@@ -48,7 +48,25 @@ public class Inputs {
     public double getRoller() {
         return (codriver.getBumper(Hand.kLeft) ? Reference.rollerSpeed 
         : codriver.getBumper(Hand.kRight) ? -Reference.rollerSpeed 
-         : 0.0);
+        : 0.0);
     }
 
+    public double getWheel() {
+        return wheel.getRawAxis(0);
+    }
+
+    public double getThrottle() {
+        return -throttle.getRawAxis(1);
+    }
+
+    public double throttleLimiter() {
+        return (throttle.getRawButton(1) ? 0.2 : 1);
+    }
+
+    public double wheelLimiter() {
+        if(!wheel.getRawButton(8)) {
+            return (getThrottle() > 0 ? 0.4 : 0.25);
+            
+        } else return 1;
+    }
 }

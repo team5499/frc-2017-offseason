@@ -2,7 +2,6 @@ package org.team5499.robots.frc2017.subsystems;
 
 import com.ctre.MotorControl.CANTalon;
 import edu.wpi.first.wpilibj.Timer;
-
 import org.team5499.robots.frc2017.Reference;
 
 public class Gearmech {

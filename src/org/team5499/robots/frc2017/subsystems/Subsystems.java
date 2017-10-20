@@ -11,7 +11,7 @@ public class Subsystems {
     public static Gearmech gearmech = new Gearmech();
     public static Inputs inputs = new Inputs();
     public static Encoders encoders = new Encoders();
-    //public static LED led = new LED();
+    public static LED led = new LED();
     public static PID leftPID = new PID(Reference.kP, Reference.kI, Reference.kD, 1); 
     public static PID rightPID = new PID(Reference.kP, Reference.kI, Reference.kD, 1);
     public static PID anglePID = new PID(Reference.kAP, Reference.kAI, Reference.kAD, 1);
