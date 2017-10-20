@@ -14,7 +14,7 @@ public class Reference {
     private static JsonObject jobject;
 
     static {
-        gson = new GsonBuilder().create();
+        //gson = new GsonBuilder().create();
         try {
             jreader = new JsonReader(new FileReader(varFilePath));
         } catch(Exception e) {

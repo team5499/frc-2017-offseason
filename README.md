@@ -2,9 +2,8 @@
 
 ## Todo list
 * Document code
-    * Deoxygen
+    * Deoxygen?
     * Use style-guide provided 
-
 * Improve Smart Dashboards
     * Add an interface for changing constants on the robot
     * Add a camera feed
@@ -24,8 +23,13 @@
     * Tune the turn command
     * Write the left and right auto
     * Tune the left and right auto
-* Fix LED class
+* Fix LED class (maybe done)
     * Ben
+
+## Building and Deploying
+1. `cd` into the frc-2017-java directory
+2. use `gradle build` or `/gradlew build` to build or use `gradle deploy` or `/gradlew deploy` to deploy
+
 
 ## Smart Dashboard
 

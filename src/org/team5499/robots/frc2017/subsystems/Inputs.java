@@ -35,9 +35,9 @@ public class Inputs {
 
     public double getClimb() {
          double a = 0.0;
-         a = (codriver.getAButton()) ? Reference.climbSpeed
-         : codriver.getBButton() ? -Reference.climbSpeed 
-          : 0.0;
+         a = (codriver.getAButton()) ? -Reference.climbSpeed
+         : codriver.getBButton() ? Reference.climbSpeed 
+         : 0.0;
          return a;
     }
 
@@ -48,7 +48,6 @@ public class Inputs {
     public double getRoller() {
         return (codriver.getBumper(Hand.kLeft) ? Reference.rollerSpeed 
         : codriver.getBumper(Hand.kRight) ? -Reference.rollerSpeed 
-         : 0.0);
+        : 0.0);
     }
-
 }
