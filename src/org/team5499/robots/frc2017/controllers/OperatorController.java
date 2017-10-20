@@ -4,6 +4,7 @@ import org.team5499.robots.frc2017.subsystems.Subsystems;
 
 public class OperatorController {
 
+    private static final int driverControlMethod = 0; // 0 is controller, 1 is wheel
 
     public OperatorController() {
     }
@@ -17,7 +18,16 @@ public class OperatorController {
      */
 
     public void Handle() {
-        Subsystems.drivetrain.drive(Subsystems.inputs.getLeftStick()  * Subsystems.inputs.isSlow(), Subsystems.inputs.getRightStick() * Subsystems.inputs.isSlow());
+        switch(driverControlMethod) {
+            case(0): 
+                Subsystems.drivetrain.drive(Subsystems.inputs.getLeftStick()  * Subsystems.inputs.isSlow(), Subsystems.inputs.getRightStick() * Subsystems.inputs.isSlow());
+                break;
+            case(1):
+                double driveVal = Subsystems.inputs.getThrottle() * Subsystems.inputs.throttleLimiter();
+                double turnVal = Subsystems.inputs.getWheel() * Subsystems.inputs.wheelLimiter();
+                Subsystems.drivetrain.drive(driveVal - turnVal, driveVal + turnVal);
+        }
+        
         Subsystems.climber.setClimb(Subsystems.inputs.getClimb());
         Subsystems.gearmech.setArm(Subsystems.inputs.getArm());
         Subsystems.gearmech.setRoller(Subsystems.inputs.getRoller());
