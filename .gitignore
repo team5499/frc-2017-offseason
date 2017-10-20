@@ -1,13 +1,19 @@
-# exlcude build folder
-build/
-# exclude bin folder
-bin/
+# exlcude build and bin folder
+/build/
+/bin/
+
 # exclude build dependent files for dashboard
 dashboard/dist/
 dashboard/node_modules/
+dashboard_dev/dist/
+dashboard_dev/node_modules/
+
 # exclude dot files
-# .project
-# .classpath
-# .vscode/
-# .settings/
-# .gradle/
+.project
+.classpath
+.vscode/
+.settings/
+.gradle/
+
+# avoid ignoring the wrapper jar
+!gradle-wrapper.jar

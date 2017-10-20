@@ -6,7 +6,7 @@ import java.io.FileReader;
 
 public class Reference {
 
-    private static Gson gson = new GsonBuilder().create();
+    private static Gson gson;
     private static final String varFilePath = "/home/lvuser/vars.json";
     private static JsonReader jreader;
     private static JsonParser jparser;
@@ -77,6 +77,15 @@ public class Reference {
 
     public static void initPIDVariables() {
         kP = jobject.get("kP").getAsDouble();
+        kI = jobject.get("kI").getAsDouble();
+        kD = jobject.get("kD").getAsDouble();
+
+        kAP = jobject.get("kAP").getAsDouble();
+        kAI = jobject.get("kAI").getAsDouble();
+        kAD = jobject.get("kAD").getAsDouble();
+
         System.out.println(kP);
+        System.out.println(kI);
+        System.out.println(kD);
     }
 }
