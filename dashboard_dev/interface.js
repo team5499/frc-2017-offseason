@@ -4,7 +4,23 @@ const electron = require("electron");
 
 // Define ui elements
 let ui = {
-    example_element: document.getElementById("example"),
-    example_element_2: document.getElementById("example2")
+    tabs: {
+        container: document.getElementById('tab'),
+        buttons: {
+            driveButton: document.getElementById("drive"),
+            pidButton: document.getElementById("pid"),
+            debugButton: document.getElementById("debug"),
+            varButton: document.getElementsById("vars")
+        }
+    },
+    sections: {
+        container: document.getElementById("sectionWrapper"),
+        sects: {
+            drive: document.getElementById("driveTab"),
+            pid:  document.getElementById("pidTab"),
+            debug:  document.getElementById("debugTab"),
+            vars:  document.getElementById("varsTab")
+        } 
+    }
 }
 

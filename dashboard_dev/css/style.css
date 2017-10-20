@@ -1,0 +1,27 @@
+html {
+    background-color: black;
+}
+
+div.tab {
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: grey;
+    padding: 0px;
+    margin-top:1px;
+    width: auto;
+}
+
+.tabButton {
+    border-right: 1px solid black;
+    background-color: inherit;
+    font-size: 15px;
+    border-radius: 0;
+    width: 24.60%;
+    margin: 1px;
+}
+
+.title {
+    text-align: center;
+    text-decoration: underline;
+    color: white;
+}
