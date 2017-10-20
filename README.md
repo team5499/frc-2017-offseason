@@ -10,9 +10,17 @@
     * Add a heat map for the robot position
     * Add a tab interface
         * Driving tab
+            * Auto Selection
+            * Camera View
+            * Match Timer
+            * Battery Voltage
+            * Connection Status
         * PID tab
+            * Error Graph
         * Debugging/console tab
+            * Console
         * Variables/tuning tab
+            * Variable inputs
 * Json file parsing
     * Reading the json variables(done)
     * writing to the json file
