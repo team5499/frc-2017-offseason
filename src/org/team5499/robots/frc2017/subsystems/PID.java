@@ -15,6 +15,7 @@ public class PID {
         kP = pVal;
         kI = iVal;
         kD = dVal;
+        ov_cap = output_cap;
     }
 
     public void setSetpoint(double s) {

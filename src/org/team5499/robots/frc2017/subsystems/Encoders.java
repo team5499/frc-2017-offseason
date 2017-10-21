@@ -9,10 +9,10 @@ public class Encoders {
 
 
     public Encoders() {
-        rightEncoder = new Encoder(Reference.rightEncoder_port1, Reference.rightEncoder_port2, true);
-        leftEncoder = new Encoder(Reference.leftEncoder_port1, Reference.leftEncoder_port2);
-        rightEncoder.setDistancePerPulse(Reference.distance_per_pulse);
-        leftEncoder.setDistancePerPulse(Reference.distance_per_pulse);
+        rightEncoder = new Encoder(Reference.RIGHT_ENCODER_PORT1, Reference.RIGHT_ENCODER_PORT2, false);
+        leftEncoder = new Encoder(Reference.LEFT_ENCODER_PORT1, Reference.LEFT_ENCODER_PORT2, true);
+        rightEncoder.setDistancePerPulse(Reference.DISTANCE_PER_PULSE);
+        leftEncoder.setDistancePerPulse(Reference.DISTANCE_PER_PULSE);
     }
 
     public double getLeftDistance() {

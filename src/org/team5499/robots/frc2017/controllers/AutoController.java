@@ -1,13 +1,11 @@
 package org.team5499.robots.frc2017.controllers;
 
-import org.team5499.robots.frc2017.subsystems.Gearmech;
-import org.team5499.robots.frc2017.subsystems.Subsystems;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.team5499.robots.frc2017.Commands.DriveCommand;
-import org.team5499.robots.frc2017.Commands.GearmechCommand;
-import org.team5499.robots.frc2017.Commands.DoNothingCommand;
-import org.team5499.robots.frc2017.Commands.TurnCommand;
-import org.team5499.robots.frc2017.Commands.Routine;
+import org.team5499.robots.frc2017.commands.DriveCommand;
+import org.team5499.robots.frc2017.commands.GearmechCommand;
+import org.team5499.robots.frc2017.commands.DoNothingCommand;
+import org.team5499.robots.frc2017.commands.TurnCommand;
+import org.team5499.robots.frc2017.commands.Routine;
 
 
 public class AutoController {
@@ -23,7 +21,7 @@ public class AutoController {
         right = new Routine();
         test = new Routine();
         //enter auto
-        center.addCommand(new DriveCommand(4,80));
+        center.addCommand(new DriveCommand(5,80));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         center.addCommand(new DriveCommand(2, -40));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
@@ -63,7 +61,7 @@ public class AutoController {
                 System.out.println("Test auto selected");
                 break;
             default:
-                System.err.println("ERRORL: Auto selected not found");
+                System.err.println("ERROR: Auto selected not found");
 
         }
 

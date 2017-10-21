@@ -1,25 +1,28 @@
 package org.team5499.robots.frc2017.subsystems;
 
 import org.team5499.robots.frc2017.Reference;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Angle {
     
-    private double angle, last_left_distance, last_right_distance;
+    private double angle, lastLeftDistance, lastRightDistance;
 
     public Angle() {
         angle = 0;
-        last_left_distance = 0;
-        last_right_distance = 0;
+        lastLeftDistance = 0;
+        lastRightDistance = 0;
     }
 
-    public void Handle(double leftValue, double rightValue) {
-        double left_dist = (leftValue - last_left_distance);
-        double right_dist = (rightValue - last_right_distance);
-        double difference = left_dist - right_dist;
-        double angleDelta = (180*difference) /(Reference.center_wheel_dist_inches * Reference.PI);
+    public void handle(double leftValue, double rightValue) {
+        double leftDistance = (leftValue - lastLeftDistance);
+        double rightDistance = (rightValue - lastRightDistance);
+        double difference = leftDistance - rightDistance;
+        double angleDelta = (180*difference) /(Reference.CENTER_WHEEL_DIST_INCHES * Reference.PI);
         angle+=angleDelta;
-        last_left_distance = leftValue;
-        last_right_distance = rightValue;
+        lastLeftDistance = leftValue;
+        lastRightDistance = rightValue;
+
+        SmartDashboard.putNumber("angle", angle);
     }
 
     public double getAngle() {
@@ -27,11 +30,12 @@ public class Angle {
     }
 
     public void resetLastDistances() {
-        last_left_distance = 0;
-        last_right_distance = 0;
+        lastLeftDistance = 0;
+        lastRightDistance = 0;
     }
 
     public void reset() {
+        System.out.println("reset");
         angle = 0;
         resetLastDistances();
     }

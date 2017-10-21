@@ -1,7 +1,7 @@
-package org.team5499.robots.frc2017.Commands;
+package org.team5499.robots.frc2017.commands;
 
 import org.team5499.robots.frc2017.Reference;
-import org.team5499.robots.frc2017.Commands.GenericCommand;
+import org.team5499.robots.frc2017.commands.GenericCommand;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -35,18 +35,22 @@ public class DriveCommand extends GenericCommand {
         Subsystems.leftPID.calculate();
         Subsystems.anglePID.calculate();
 
-        double leftDrive = -Subsystems.leftPID.getOutput();
-        double rightDrive = -Subsystems.rightPID.getOutput();
+        double leftDrive = Subsystems.leftPID.getOutput();
+        double rightDrive = Subsystems.rightPID.getOutput();
 
-        leftDrive = (leftDrive > Reference.maxAutoSpeed ? Reference.maxAutoSpeed 
-        : leftDrive < -Reference.maxAutoSpeed ? -Reference.maxAutoSpeed 
-        : Reference.maxAutoSpeed);
+        System.out.println(leftDrive + ":" + rightDrive);
 
-        rightDrive = (rightDrive > Reference.maxAutoSpeed ? Reference.maxAutoSpeed 
-        : rightDrive < -Reference.maxAutoSpeed ? -Reference.maxAutoSpeed 
-        : Reference.maxAutoSpeed);
+        if(Math.abs(leftDrive) > Reference.MAX_AUTO_SPEED)
+            leftDrive = (leftDrive>0) ? Reference.MAX_AUTO_SPEED : -Reference.MAX_AUTO_SPEED;
 
-        Subsystems.drivetrain.drive(leftDrive - Subsystems.anglePID.getOutput(), rightDrive + Subsystems.anglePID.getOutput());
+        if(Math.abs(rightDrive) > Reference.MAX_AUTO_SPEED)
+            rightDrive = (rightDrive>0) ? Reference.MAX_AUTO_SPEED : -Reference.MAX_AUTO_SPEED;
+
+        System.out.println("Angle Output:" + Subsystems.anglePID.getOutput() + " Angle:" + Subsystems.angle.getAngle());
+
+        Subsystems.drivetrain.drive(-Subsystems.anglePID.getOutput(), Subsystems.anglePID.getOutput());
+
+        updateSmartDash();
     }
 
 

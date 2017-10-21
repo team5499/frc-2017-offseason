@@ -1,4 +1,4 @@
-package org.team5499.robots.frc2017.Commands;
+package org.team5499.robots.frc2017.commands;
 
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 import org.team5499.robots.frc2017.Reference;
@@ -23,7 +23,7 @@ public class GenericCommand {
     }
 
     public boolean isFinished() {
-        return (m_timeout < Timer.getFPGATimestamp() - m_start_time ? true : false);
+        return (m_timeout < Timer.getFPGATimestamp() - m_start_time);
     }
 
 

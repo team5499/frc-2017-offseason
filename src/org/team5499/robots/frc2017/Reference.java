@@ -1,69 +1,71 @@
 package org.team5499.robots.frc2017;
 
-import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.io.FileReader;
 
 public class Reference {
 
-    private static Gson gson;
-    private static final String varFilePath = "/home/lvuser/vars.json";
-    private static JsonReader jreader;
-    private static JsonParser jparser;
-    private static JsonElement ptree;
-    private static JsonObject jobject;
+    private static final String VAR_FILE_PATH = "/home/lvuser/vars.json";
+    private static JsonReader jReader;
+    private static JsonParser jParser;
+    private static JsonElement pTree;
+    private static JsonObject jObject;
 
     static {
-        //gson = new GsonBuilder().create();
         try {
-            jreader = new JsonReader(new FileReader(varFilePath));
+            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
         } catch(Exception e) {
             e.printStackTrace();
         }
 
-        jparser = new JsonParser();
-        ptree = jparser.parse(jreader);
-        jobject = ptree.getAsJsonObject();
+        jParser = new JsonParser();
+        pTree = jParser.parse(jReader);
+        jObject = pTree.getAsJsonObject();
+
+        initPIDVariables();
     }
 
     // Talon Ports
-    public static final int left1_port = 1;
-    public static final int left2_port = 2;
-    public static final int right1_port = 3;
-    public static final int right2_port = 4;
-    public static final int arm_port = 5;
-    public static final int roller_port = 6;
-    public static final int climb1_port = 7;
-    public static final int climb2_port = 8;
+    public static final int LEFT1_PORT = 1;
+    public static final int LEFT2_PORT = 2;
+    public static final int RIGHT1_PORT = 3;
+    public static final int RIGHT2_PORT = 4;
+    public static final int ARM_PORT = 5;
+    public static final int ROLLER_PORT = 6;
+    public static final int CLIMBER1_PORT = 7;
+    public static final int CLIMBER2_PORT = 8;
 
     // Encoder Ports
-    public static final int rightEncoder_port1 = 0;
-    public static final int rightEncoder_port2 = 1;
-    public static final int leftEncoder_port1 = 2;
-    public static final int leftEncoder_port2 = 3;
+    public static final int RIGHT_ENCODER_PORT1 = 0;
+    public static final int RIGHT_ENCODER_PORT2 = 1;
+    public static final int LEFT_ENCODER_PORT1 = 2;
+    public static final int LEFT_ENCODER_PORT2 = 3;
 
     // Digital Output ports
-    public static final int red_port = 4;
-    public static final int green_port = 5;
-    public static final int blue_port = 6;
+    public static final int RED_PORT = 4;
+    public static final int GREEN_PORT = 5;
+    public static final int BLUE_PORT = 6;
 
     // Input Ports
-    public static final int codriver_port = 0;
-    public static final int driver_port = 1;
-    public static final int wheel_port = 2;
-    public static final int joystick_port = 3;
+    public static final int CODRIVER_PORT = 0;
+    public static final int DRIVER_PORT = 1;
+    public static final int WHEEL_PORT = 2;
+    public static final int JOYSTICK_PORT = 3;
 
     // variables 
-    public static final double armMult = 0.5;
-    public static final double rollerSpeed = 0.9;
-    public static final double climbSpeed = 0.99;
-    public static final double slowMult = 0.5;
-    public static final double maxAutoSpeed = 0.4;
+    public static final double ARM_MULTIPLIER = 0.5;
+    public static final double ROLLER_SPEED = 0.9;
+    public static final double CLIMB_SPEED = 0.99;
+    public static final double SLOW_MULTIPLIER = 0.5;
+    public static final double MAX_AUTO_SPEED = 0.3;
 
     // Constants
     public static final double PI = 3.1414926;
-    public static final double distance_per_pulse = (PI * 4.0) / 256.0;
-    public static final double center_wheel_dist_inches = 25.0;
+    public static final double DISTANCE_PER_PULSE = (PI * 4.0) / 256.0;
+    public static final double CENTER_WHEEL_DIST_INCHES = 25.0;
 
     // PID constants
     public static double kP = 0.0;
@@ -74,16 +76,20 @@ public class Reference {
     public static double kAD = 0.0;
 
     public static void initPIDVariables() {
-        kP = jobject.get("kP").getAsDouble();
-        kI = jobject.get("kI").getAsDouble();
-        kD = jobject.get("kD").getAsDouble();
+        kP = jObject.get("kP").getAsDouble();
+        kI = jObject.get("kI").getAsDouble();
+        kD = jObject.get("kD").getAsDouble();
 
-        kAP = jobject.get("kAP").getAsDouble();
-        kAI = jobject.get("kAI").getAsDouble();
-        kAD = jobject.get("kAD").getAsDouble();
+        kAP = jObject.get("kAP").getAsDouble();
+        kAI = jObject.get("kAI").getAsDouble();
+        kAD = jObject.get("kAD").getAsDouble();
 
-        System.out.println(kP);
-        System.out.println(kI);
-        System.out.println(kD);
+        System.out.println("kP value:" + kP);
+        System.out.println("kI value:" + kI);
+        System.out.println("kD value:" + kD);
+
+        System.out.println("kAP value:" + kAP);
+        System.out.println("kAI value:" + kAI);
+        System.out.println("kAD value:" + kAD);
     }
 }

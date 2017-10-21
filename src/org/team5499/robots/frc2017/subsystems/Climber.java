@@ -7,8 +7,8 @@ public class Climber {
     private CANTalon climb1, climb2;
 
     public Climber() {
-        climb1 = new CANTalon(Reference.climb1_port);
-        climb2 = new CANTalon(Reference.climb2_port);
+        climb1 = new CANTalon(Reference.CLIMBER1_PORT);
+        climb2 = new CANTalon(Reference.CLIMBER2_PORT);
     }
 
     public void setClimb(double c) {

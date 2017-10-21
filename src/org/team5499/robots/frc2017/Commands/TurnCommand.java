@@ -1,6 +1,6 @@
-package org.team5499.robots.frc2017.Commands;
+package org.team5499.robots.frc2017.commands;
 
-import org.team5499.robots.frc2017.Commands.*;
+import org.team5499.robots.frc2017.commands.GenericCommand;
 import org.team5499.robots.frc2017.subsystems.*;
 
 public class TurnCommand extends GenericCommand {

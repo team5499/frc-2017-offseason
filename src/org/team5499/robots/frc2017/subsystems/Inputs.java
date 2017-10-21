@@ -12,10 +12,10 @@ public class Inputs {
 
 
     public Inputs() {
-        driver = new XboxController(Reference.driver_port);
-        codriver = new XboxController(Reference.codriver_port);
-        wheel = new Joystick(Reference.wheel_port);
-        throttle = new Joystick(Reference.joystick_port);
+        driver = new XboxController(Reference.DRIVER_PORT);
+        codriver = new XboxController(Reference.CODRIVER_PORT);
+        wheel = new Joystick(Reference.WHEEL_PORT);
+        throttle = new Joystick(Reference.JOYSTICK_PORT);
     }
     
     public double getLeftStick() {
@@ -28,26 +28,26 @@ public class Inputs {
     }
 
     public double isSlow() {
-        return (driver.getTrigger(Hand.kRight) ? Reference.slowMult // Kinda Slow
-        : driver.getTrigger(Hand.kLeft) ? Reference.slowMult / 2 // Really Slow
+        return (driver.getTrigger(Hand.kRight) ? Reference.SLOW_MULTIPLIER // Kinda Slow
+        : driver.getTrigger(Hand.kLeft) ? Reference.SLOW_MULTIPLIER / 2 // Really Slow
         : 1.0); // Normal Speed / Not Slow
     }
 
     public double getClimb() {
          double a = 0.0;
-         a = (codriver.getAButton()) ? -Reference.climbSpeed
-         : codriver.getBButton() ? Reference.climbSpeed 
+         a = (codriver.getAButton()) ? -Reference.CLIMB_SPEED
+         : codriver.getBButton() ? Reference.CLIMB_SPEED
          : 0.0;
          return a;
     }
 
     public double getArm() {
-        return codriver.getY(Hand.kLeft) * Reference.armMult;
+        return codriver.getY(Hand.kLeft) * Reference.ARM_MULTIPLIER;
     }
 
     public double getRoller() {
-        return (codriver.getBumper(Hand.kLeft) ? Reference.rollerSpeed 
-        : codriver.getBumper(Hand.kRight) ? -Reference.rollerSpeed 
+        return (codriver.getBumper(Hand.kLeft) ? Reference.ROLLER_SPEED
+        : codriver.getBumper(Hand.kRight) ? -Reference.ROLLER_SPEED
         : 0.0);
     }
 

@@ -1,4 +1,4 @@
-package org.team5499.robots.frc2017.Commands;
+package org.team5499.robots.frc2017.commands;
 
 public class DoNothingCommand extends GenericCommand {
     public DoNothingCommand(double to) {

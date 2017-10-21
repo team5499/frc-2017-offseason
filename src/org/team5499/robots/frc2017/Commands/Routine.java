@@ -1,7 +1,7 @@
-package org.team5499.robots.frc2017.Commands;
+package org.team5499.robots.frc2017.commands;
 
 import java.util.ArrayList;
-import org.team5499.robots.frc2017.Commands.*;
+import org.team5499.robots.frc2017.commands.GenericCommand;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 
 public class Routine {
@@ -25,6 +25,7 @@ public class Routine {
 
     public void handle() {
         if(currentCommand.isFinished()) {
+            System.out.println("INFO:isFinished");
             Subsystems.drivetrain.stop();
             if(!advanceRoutine()) return;
         } else {

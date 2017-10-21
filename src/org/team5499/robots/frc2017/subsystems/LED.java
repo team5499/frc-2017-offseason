@@ -25,9 +25,9 @@ public class LED {
 
     public LED() {
         // timer.start();
-        redController = new DigitalOutput(Reference.red_port);
-        greenController = new DigitalOutput(Reference.green_port);
-        blueController = new DigitalOutput(Reference.blue_port);
+        redController = new DigitalOutput(Reference.RED_PORT);
+        greenController = new DigitalOutput(Reference.GREEN_PORT);
+        blueController = new DigitalOutput(Reference.BLUE_PORT);
 
         redController.enablePWM(0);
         redController.setPWMRate(100);

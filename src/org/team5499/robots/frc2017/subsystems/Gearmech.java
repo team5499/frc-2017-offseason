@@ -12,8 +12,8 @@ public class Gearmech {
 
     public Gearmech() {
         timer = new Timer();
-        arm = new CANTalon(Reference.arm_port);
-        roller = new CANTalon(Reference.roller_port);
+        arm = new CANTalon(Reference.ARM_PORT);
+        roller = new CANTalon(Reference.ROLLER_PORT);
         arm.setInverted(true);
         arm.setVoltageRampRate(10);
         roller.setInverted(true);

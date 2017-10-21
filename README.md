@@ -17,10 +17,12 @@
             * Connection Status
         * PID tab
             * Error Graph
+            * PID variables(editable)
         * Debugging/console tab
             * Console
+            * List of variables
         * Variables/tuning tab
-            * Variable inputs
+            * Variable inputs(other than PID)
 * Json file parsing
     * Reading the json variables(done)
     * writing to the json file
