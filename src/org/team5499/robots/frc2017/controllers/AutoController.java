@@ -6,6 +6,7 @@ import org.team5499.robots.frc2017.commands.GearmechCommand;
 import org.team5499.robots.frc2017.commands.DoNothingCommand;
 import org.team5499.robots.frc2017.commands.TurnCommand;
 import org.team5499.robots.frc2017.commands.Routine;
+import org.team5499.robots.frc2017.commands.GenericCommand;
 
 
 public class AutoController {

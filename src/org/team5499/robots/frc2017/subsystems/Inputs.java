@@ -56,7 +56,7 @@ public class Inputs {
     }
 
     public double getThrottle() {
-        return -throttle.getRawAxis(1);
+        return throttle.getRawAxis(1);
     }
 
     public double throttleLimiter() {
