@@ -5,7 +5,6 @@ import org.team5499.robots.frc2017.Reference;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 
 public class Subsystems {
-
     public static Drivetrain drivetrain = new Drivetrain();
     public static Climber climber = new Climber();
     public static Gearmech gearmech = new Gearmech();
