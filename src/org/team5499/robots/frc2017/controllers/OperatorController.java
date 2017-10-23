@@ -25,7 +25,7 @@ public class OperatorController {
                 Subsystems.drivetrain.drive(driveVal - turnVal, driveVal + turnVal);
                 break;
             default:
-                System.err.println("Very Specific Error!!!!");
+                System.err.println("ERROR: Invalid driver control method (" + driverControlMethod + ")");
                 break;
         }
         

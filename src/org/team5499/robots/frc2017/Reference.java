@@ -63,7 +63,7 @@ public class Reference {
     public static final double MAX_AUTO_SPEED = 0.3;
 
     // Constants
-    public static final double PI = 3.1415926;
+    public static final double PI = Math.PI;
     public static final double DISTANCE_PER_PULSE = (PI * 4.0) / 256.0;
     public static final double CENTER_WHEEL_DIST_INCHES = 25.0;
 

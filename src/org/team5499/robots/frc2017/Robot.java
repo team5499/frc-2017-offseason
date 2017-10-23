@@ -29,6 +29,8 @@ public class Robot extends IterativeRobot {
         Subsystems.encoders.reset();
         // Set the LEDs to white
         Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        // Resets position
+        Subsystems.position.reset();
     }
 
     @Override
@@ -50,6 +52,8 @@ public class Robot extends IterativeRobot {
         Subsystems.encoders.reset();
         // Reset the angle when the robot is disabled
         Subsystems.angle.reset();
+        //Reset the position when robot is disabled
+        Subsystems.position.reset();
         // Reset the autocontroller when the robot is disabled
         // This means the robot code doesn't need to be restarted everytime auto is run
         autoController.reset();
@@ -74,6 +78,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         autoController.Handle();
+        Subsystems.position.handle();
     }
 
     @Override
@@ -87,5 +92,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         operatorController.Handle();
+        Subsystems.position.handle();
     }
 }

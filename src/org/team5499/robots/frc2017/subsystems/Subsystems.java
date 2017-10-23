@@ -15,5 +15,6 @@ public class Subsystems {
     public static PID rightPID = new PID(Reference.kP, Reference.kI, Reference.kD, 1);
     public static PID anglePID = new PID(Reference.kAP, Reference.kAI, Reference.kAD, 1);
     public static Angle angle = new Angle();
+    public static Position position = new Position();
     public static BuiltInAccelerometer accel = new BuiltInAccelerometer();
 }

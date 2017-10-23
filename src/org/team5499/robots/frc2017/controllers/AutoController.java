@@ -21,7 +21,7 @@ public class AutoController {
         left = new Routine();
         right = new Routine();
         test = new Routine();
-        //enter auto
+        // center auto
         center.addCommand(new DriveCommand(5,80));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         center.addCommand(new DriveCommand(2, -40));
