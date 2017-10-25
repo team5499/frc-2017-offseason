@@ -38,17 +38,13 @@ public class DriveCommand extends GenericCommand {
         double leftDrive = Subsystems.leftPID.getOutput();
         double rightDrive = Subsystems.rightPID.getOutput();
 
-        System.out.println(leftDrive + ":" + rightDrive);
-
         if(Math.abs(leftDrive) > Reference.MAX_AUTO_SPEED)
             leftDrive = (leftDrive>0) ? Reference.MAX_AUTO_SPEED : -Reference.MAX_AUTO_SPEED;
 
         if(Math.abs(rightDrive) > Reference.MAX_AUTO_SPEED)
             rightDrive = (rightDrive>0) ? Reference.MAX_AUTO_SPEED : -Reference.MAX_AUTO_SPEED;
 
-        System.out.println("Angle Output:" + Subsystems.anglePID.getOutput() + " Angle:" + Subsystems.angle.getAngle());
-
-        Subsystems.drivetrain.drive(-Subsystems.anglePID.getOutput(), Subsystems.anglePID.getOutput());
+        Subsystems.drivetrain.drive(-leftDrive - Subsystems.anglePID.getOutput(), -rightDrive + Subsystems.anglePID.getOutput());
 
         updateSmartDash();
     }

@@ -1,6 +1,9 @@
 package org.team5499.robots.frc2017;
 
 import com.google.gson.stream.JsonReader;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,20 +16,6 @@ public class Reference {
     private static JsonParser jParser;
     private static JsonElement pTree;
     private static JsonObject jObject;
-
-    static {
-        try {
-            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        jParser = new JsonParser();
-        pTree = jParser.parse(jReader);
-        jObject = pTree.getAsJsonObject();
-
-        initPIDVariables();
-    }
 
     // Talon Ports
     public static final int LEFT1_PORT = 1;
@@ -44,7 +33,7 @@ public class Reference {
     public static final int LEFT_ENCODER_PORT1 = 2;
     public static final int LEFT_ENCODER_PORT2 = 3;
 
-    // Digital Output ports
+    // LED ports
     public static final int RED_PORT = 4;
     public static final int GREEN_PORT = 5;
     public static final int BLUE_PORT = 6;
@@ -63,9 +52,10 @@ public class Reference {
     public static final double MAX_AUTO_SPEED = 0.3;
 
     // Constants
-    public static final double PI = 3.1414926;
-    public static final double DISTANCE_PER_PULSE = (PI * 4.0) / 256.0;
+    public static final double PI = 3.14159265358979;
+    public static final double DISTANCE_PER_PULSE = (PI * 3.94) / 256.0;
     public static final double CENTER_WHEEL_DIST_INCHES = 25.0;
+    public static final double RIGHT_ENCODER_MULTIPLIER = 0.9795;
 
     // PID constants
     public static double kP = 0.0;
@@ -74,6 +64,29 @@ public class Reference {
     public static double kAP = 0.0;
     public static double kAI = 0.0;
     public static double kAD = 0.0;
+    public static double kATP = 0.0;
+    public static double kATI = 0.0;
+    public static double kATD = 0.0;
+
+    static {
+        try {
+            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        jParser = new JsonParser();
+        pTree = jParser.parse(jReader);
+        jObject = pTree.getAsJsonObject();
+
+        initPIDVariables();
+        SmartDashboard.putNumber("pValue", kP);
+        SmartDashboard.putNumber("iValue", kI);
+        SmartDashboard.putNumber("dValue", kD);
+        SmartDashboard.putNumber("apValue", kAP);
+        SmartDashboard.putNumber("aiValue", kAI);
+        SmartDashboard.putNumber("adValue", kAD);
+    }
 
     public static void initPIDVariables() {
         kP = jObject.get("kP").getAsDouble();
@@ -84,6 +97,10 @@ public class Reference {
         kAI = jObject.get("kAI").getAsDouble();
         kAD = jObject.get("kAD").getAsDouble();
 
+        kATP = jObject.get("kATP").getAsDouble();
+        kATI = jObject.get("kATI").getAsDouble();
+        kATD = jObject.get("kATD").getAsDouble();
+
         System.out.println("kP value:" + kP);
         System.out.println("kI value:" + kI);
         System.out.println("kD value:" + kD);
@@ -91,5 +108,19 @@ public class Reference {
         System.out.println("kAP value:" + kAP);
         System.out.println("kAI value:" + kAI);
         System.out.println("kAD value:" + kAD);
+
+        System.out.println("kATP value:" + kATP);
+        System.out.println("kATI value:" + kATI);
+        System.out.println("kATD value:" + kATD);
+    }
+    public static void updatePIDVariables() {
+        kP = SmartDashboard.getNumber("pValue", kP);
+        kI = SmartDashboard.getNumber("iValue", kI);
+        kD = SmartDashboard.getNumber("dValue", kD);
+        kAP = SmartDashboard.getNumber("apValue", kAP);
+        kAI = SmartDashboard.getNumber("aiValue", kAI);
+        kAD = SmartDashboard.getNumber("adValue", kAD);
+
+        System.out.println("Dash:" + kP + ":" + kI);
     }
 }

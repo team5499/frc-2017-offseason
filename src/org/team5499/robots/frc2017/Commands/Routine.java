@@ -25,7 +25,6 @@ public class Routine {
 
     public void handle() {
         if(currentCommand.isFinished()) {
-            System.out.println("INFO:isFinished");
             Subsystems.drivetrain.stop();
             if(!advanceRoutine()) return;
         } else {

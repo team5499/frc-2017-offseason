@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
     @Override
 	public void disabledInit() {
         // Update the PID variables when the robot is disabled
-        Reference.initPIDVariables();
+        Reference.updatePIDVariables();
         Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
@@ -53,6 +53,7 @@ public class Robot extends IterativeRobot {
         // Reset the autocontroller when the robot is disabled
         // This means the robot code doesn't need to be restarted everytime auto is run
         autoController.reset();
+        SmartDashboard.putBoolean("reset_graph", true);
     }
     
 	@Override
@@ -61,7 +62,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        Reference.initPIDVariables();
+        SmartDashboard.putBoolean("reset_graph", false);
+        Reference.updatePIDVariables();
         Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);

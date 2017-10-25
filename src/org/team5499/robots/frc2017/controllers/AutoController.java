@@ -1,6 +1,7 @@
 package org.team5499.robots.frc2017.controllers;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team5499.robots.frc2017.subsystems.Subsystems;
 import org.team5499.robots.frc2017.commands.DriveCommand;
 import org.team5499.robots.frc2017.commands.GearmechCommand;
 import org.team5499.robots.frc2017.commands.DoNothingCommand;
@@ -21,15 +22,14 @@ public class AutoController {
         right = new Routine();
         test = new Routine();
         //enter auto
-        center.addCommand(new DriveCommand(5,80));
+        center.addCommand(new DriveCommand(3,80));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         center.addCommand(new DriveCommand(2, -40));
+        center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Left auto
-        left.addCommand(new DriveCommand(4, 60));
-        left.addCommand(new TurnCommand(6, 45));
-        left.addCommand(new DoNothingCommand(2));
+        left.addCommand(new TurnCommand(6, 60));
 
         // Right auto
         right.addCommand(new DoNothingCommand(2));
@@ -37,12 +37,13 @@ public class AutoController {
         // Test
         test.addCommand(new DoNothingCommand(2));
 
-        autoChoice = 0;
+        autoChoice = 1;
+        SmartDashboard.putNumber("automode", autoChoice);
     }
 
     public void Start() {
         System.out.println("Auto Controller started");
-        SmartDashboard.getNumber("automode", 0);
+        autoChoice = (int) SmartDashboard.getNumber("automode", 1);
         switch(autoChoice) {
             case 0:
                 currRoutine = center;
@@ -74,6 +75,10 @@ public class AutoController {
     }
 
     public void reset() {
+        Subsystems.climber.stop();
+        Subsystems.gearmech.stop();
+        Subsystems.drivetrain.stop();
+
         left.reset();
         center.reset();
         right.reset();

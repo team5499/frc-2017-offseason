@@ -1,6 +1,5 @@
 package org.team5499.robots.frc2017.commands;
 
-import org.team5499.robots.frc2017.Reference;
 import org.team5499.robots.frc2017.commands.GenericCommand;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 

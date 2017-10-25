@@ -25,6 +25,15 @@ let ui = {
         set: document.getElementById('set'),
         get: document.getElementById('get')
     },
+    pid: {
+        pVal: document.getElementById('pVal'),
+        iVal: document.getElementById('iVal'),
+        dVal: document.getElementById('dVal'),
+        apVal: document.getElementById('apVal'),
+        aiVal: document.getElementById('aiVal'),
+        adVal: document.getElementById('adVal'),
+        pidUpdate: document.getElementById('pidUpdate'),
+    },
     autoSelect: document.getElementById('auto-select'),
     armPosition: document.getElementById('arm-position'),
     graphDisplay: document.getElementById('graph_display')
@@ -193,32 +202,15 @@ NetworkTables.addKeyListener('/SmartDashboard/auto/angle_error', (key, value) =>
     auto_graph.data.datasets[2].data.push(parseFloat(value));
     auto_graph.update();
 });
-
-// The following case is an example, for a robot with an arm at the front.
-// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
-NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
-    // 0 is all the way back, 1200 is 45 degrees forward. We don't want it going past that.
-    if (value > 1140) {
-        value = 1140;
+NetworkTables.addKeyListener('/SmartDashboard/reset_graph', (key, value) => {
+    console.log("what?" + value);
+    if(value) {
+        auto_graph.data.labels=[];
+        auto_graph.data.datasets[0].data=[];
+        auto_graph.data.datasets[1].data=[];
+        auto_graph.data.datasets[2].data=[];
+        auto_graph.update();
     }
-    else if (value < 0) {
-        value = 0;
-    }
-    // Calculate visual rotation of arm
-    var armAngle = value * 3 / 20 - 45;
-    // Rotate the arm in diagram to match real arm
-    ui.robotDiagram.arm.style.transform = `rotate(${armAngle}deg)`;
-});
-
-// This button is just an example of triggering an event on the robot by clicking a button.
-NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
-    // Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
-    // TODO: We shouldn't have to do this for every variable that can be a boolean.
-    if (typeof value === 'string')
-        value = value === 'true';
-    // Set class active if value is true and unset it if it is false
-    ui.example.button.classList.toggle('active', value);
-    ui.example.readout.data = 'Value is ' + (value ? 'true' : 'false');
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
@@ -373,7 +365,32 @@ ui.tuning.get.onclick = function () {
 ui.autoSelect.onchange = function () {
     NetworkTables.putValue('/SmartDashboard/automode', parseInt(this.value));
 };
-// Get value of arm height slider when it's adjusted
-ui.armPosition.oninput = function () {
-    NetworkTables.putValue('/SmartDashboard/arm/encoder', parseInt(this.value));
+
+// Update PID constants
+NetworkTables.addKeyListener('/SmartDashboard/pValue', (key, value) => {
+    ui.pid.pVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/iValue', (key, value) => {
+    ui.pid.iVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/dValue', (key, value) => {
+    ui.pid.dVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/apValue', (key, value) => {
+    ui.pid.apVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/aiValue', (key, value) => {
+    ui.pid.aiVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/adValue', (key, value) => {
+    ui.pid.adVal.value = value;
+});
+
+ui.pid.pidUpdate.onclick = function () {
+    NetworkTables.putValue('/SmartDashboard/pValue', parseFloat(ui.pid.pVal.value));
+    NetworkTables.putValue('/SmartDashboard/iValue', parseFloat(ui.pid.iVal.value));
+    NetworkTables.putValue('/SmartDashboard/dValue', parseFloat(ui.pid.dVal.value));
+    NetworkTables.putValue('/SmartDashboard/apValue', parseFloat(ui.pid.apVal.value));
+    NetworkTables.putValue('/SmartDashboard/aiValue', parseFloat(ui.pid.aiVal.value));
+    NetworkTables.putValue('/SmartDashboard/adValue', parseFloat(ui.pid.adVal.value));
 };
