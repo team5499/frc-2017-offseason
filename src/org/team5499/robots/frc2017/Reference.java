@@ -1,6 +1,7 @@
 package org.team5499.robots.frc2017;
 
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -8,6 +9,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 public class Reference {
 
@@ -152,5 +154,32 @@ public class Reference {
         kAD = SmartDashboard.getNumber("adValue", kAD);
 
         System.out.println("Dash:" + kP + ":" + kI);
+    }
+
+    public static void updateJSON() {
+        JsonWriter writer;
+        try {
+            writer = new JsonWriter(new FileWriter(VAR_FILE_PATH));
+
+            writer.beginObject();
+            writer.name("kP").value(kP);
+            writer.name("kI").value(kI);
+            writer.name("kD").value(kD);
+
+            writer.name("kAP").value(kAP);
+            writer.name("kAI").value(kAI);
+            writer.name("kAD").value(kAD);
+
+            writer.name("kATP").value(kATP);
+            writer.name("kATI").value(kATI);
+            writer.name("kATD").value(kATD);
+
+            writer.endObject();
+            writer.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

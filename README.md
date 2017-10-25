@@ -33,8 +33,7 @@
     * Tune the turn command
     * Write the left and right auto
     * Tune the left and right auto
-* Fix LED class (maybe done)
-    * Ben
+* Fix LED class (Done)
 
 ## Building and Deploying
 1. `cd` into the frc-2017-java directory
