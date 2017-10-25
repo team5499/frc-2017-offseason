@@ -16,6 +16,11 @@ public class Drivetrain {
         right2.setInverted(true);
     }
 
+    /**
+     * Sets drivetrain motor speeds
+     * @param left sets values of left side motors
+     * @param right sets values of the right side motors
+     */
     public void drive(double left, double right) {
         left1.set(left);
         left2.set(left);
@@ -23,6 +28,10 @@ public class Drivetrain {
         right2.set(right);
     }
 
+    /**
+     * Stops drivetrain
+     * @see drive()
+     */
     public void stop() {
         drive(0, 0);
     }

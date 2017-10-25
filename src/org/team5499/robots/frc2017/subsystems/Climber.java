@@ -11,11 +11,18 @@ public class Climber {
         climb2 = new CANTalon(Reference.CLIMBER2_PORT);
     }
 
+    /**
+     * Sets climber motor's speeds
+     * @param c motor speeds
+     */
     public void setClimb(double c) {
         climb1.set(c);
         climb2.set(c);
     }
 
+    /**
+     * Stops climber motors 
+     */
     public void stop() {
         setClimb(0);
     }

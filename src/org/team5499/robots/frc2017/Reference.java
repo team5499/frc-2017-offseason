@@ -17,6 +17,25 @@ public class Reference {
     private static JsonElement pTree;
     private static JsonObject jObject;
 
+<<<<<<< HEAD
+=======
+    static {
+        /*
+        try {
+            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        jParser = new JsonParser();
+        pTree = jParser.parse(jReader);
+        jObject = pTree.getAsJsonObject();
+        */
+
+        initPIDVariables();
+    }
+
+>>>>>>> af3672c2725352156db7f18f45afa41dd5f0f94a
     // Talon Ports
     public static final int LEFT1_PORT = 1;
     public static final int LEFT2_PORT = 2;
@@ -39,8 +58,8 @@ public class Reference {
     public static final int BLUE_PORT = 6;
 
     // Input Ports
-    public static final int CODRIVER_PORT = 0;
-    public static final int DRIVER_PORT = 1;
+    public static final int DRIVER_PORT = 0;
+    public static final int CODRIVER_PORT = 1;
     public static final int WHEEL_PORT = 2;
     public static final int JOYSTICK_PORT = 3;
 
@@ -52,7 +71,7 @@ public class Reference {
     public static final double MAX_AUTO_SPEED = 0.3;
 
     // Constants
-    public static final double PI = 3.14159265358979;
+    public static final double PI = Math.PI;
     public static final double DISTANCE_PER_PULSE = (PI * 3.94) / 256.0;
     public static final double CENTER_WHEEL_DIST_INCHES = 25.0;
     public static final double RIGHT_ENCODER_MULTIPLIER = 0.9795;
@@ -88,7 +107,21 @@ public class Reference {
         SmartDashboard.putNumber("adValue", kAD);
     }
 
+
+    /**
+    * Gets PID values from vars.json file
+    */
     public static void initPIDVariables() {
+        try {
+            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        jParser = new JsonParser();
+        pTree = jParser.parse(jReader);
+        jObject = pTree.getAsJsonObject();
+
         kP = jObject.get("kP").getAsDouble();
         kI = jObject.get("kI").getAsDouble();
         kD = jObject.get("kD").getAsDouble();
