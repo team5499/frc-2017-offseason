@@ -1,8 +1,5 @@
 package org.team5499.robots.frc2017.commands;
 
-import org.team5499.robots.frc2017.subsystems.Subsystems;
-import org.team5499.robots.frc2017.Reference;
-
 import edu.wpi.first.wpilibj.Timer;
 
 public class GenericCommand {

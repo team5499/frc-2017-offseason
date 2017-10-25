@@ -20,7 +20,7 @@ public class Encoders {
     }
     
     public double getRightDistance() {
-        return rightEncoder.getDistance();
+        return rightEncoder.getDistance() * Reference.RIGHT_ENCODER_MULTIPLIER;
     }
 
     public void reset() {

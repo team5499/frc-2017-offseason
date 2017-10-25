@@ -69,7 +69,7 @@ public class LED {
         current_time_millis = Timer.getFPGATimestamp() * 1000;
         
         if(current_time_millis % interval <= 50 && current_time_millis % interval >= 0) {
-            sequenceIndex = (sequenceIndex <= colorSequence.size() ? sequenceIndex += 1 : 0);
+            sequenceIndex = (sequenceIndex < colorSequence.size() ? sequenceIndex += 1 : 0);
             currentColor = colorSequence.get(sequenceIndex);
             setRGB(currentColor, true, true);
         }

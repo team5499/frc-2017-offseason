@@ -4,6 +4,7 @@ team_number=5499
 
 if [ "${1}" == "push" ]; then
     scp ${vars_directory} admin@roborio-${team_number}-frc.local:/home/lvuser/vars.json
+    ssh admin@roborio-${team_number}-frc.local "sync"
 else
     scp admin@roborio-${team_number}-frc.local:/home/lvuser/vars.json ${vars_directory}
 fi

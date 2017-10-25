@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const electron = require("electron");
-
+const $ = require("jquery");
 // Define ui elements
 let ui = {
     tabs: {
@@ -10,7 +7,7 @@ let ui = {
             driveButton: document.getElementById("drive"),
             pidButton: document.getElementById("pid"),
             debugButton: document.getElementById("debug"),
-            varButton: document.getElementsById("vars")
+            varButton: document.getElementById("vars")
         }
     },
     sections: {
@@ -24,3 +21,4 @@ let ui = {
     }
 }
 
+$("sectionWrapper").hide();

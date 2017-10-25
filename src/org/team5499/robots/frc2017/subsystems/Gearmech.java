@@ -46,5 +46,9 @@ public class Gearmech {
         }
         return false;
     }
+    public void stop() {
+        setArm(0);
+        setRoller(0);
+    }
 
 }
