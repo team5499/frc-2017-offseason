@@ -17,22 +17,6 @@ public class Reference {
     private static JsonElement pTree;
     private static JsonObject jObject;
 
-    static {
-        /*
-        try {
-            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        jParser = new JsonParser();
-        pTree = jParser.parse(jReader);
-        jObject = pTree.getAsJsonObject();
-        */
-
-        initPIDVariables();
-    }
-
     // Talon Ports
     public static final int LEFT1_PORT = 1;
     public static final int LEFT2_PORT = 2;
@@ -71,38 +55,20 @@ public class Reference {
     public static final double PI = Math.PI;
     public static final double DISTANCE_PER_PULSE = (PI * 3.94) / 256.0;
     public static final double CENTER_WHEEL_DIST_INCHES = 25.0;
-    public static final double RIGHT_ENCODER_MULTIPLIER = 0.9795;
+    public static double RIGHT_ENCODER_MULTIPLIER = 0.9795;
 
-    // PID constants
+    // PID drive constants
     public static double kP = 0.0;
     public static double kI = 0.0;
     public static double kD = 0.0;
+    //PID angle correction constants
     public static double kAP = 0.0;
     public static double kAI = 0.0;
     public static double kAD = 0.0;
+    // PID constants for the turn command
     public static double kATP = 0.0;
     public static double kATI = 0.0;
     public static double kATD = 0.0;
-
-    static {
-        try {
-            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        jParser = new JsonParser();
-        pTree = jParser.parse(jReader);
-        jObject = pTree.getAsJsonObject();
-
-        initPIDVariables();
-        SmartDashboard.putNumber("pValue", kP);
-        SmartDashboard.putNumber("iValue", kI);
-        SmartDashboard.putNumber("dValue", kD);
-        SmartDashboard.putNumber("apValue", kAP);
-        SmartDashboard.putNumber("aiValue", kAI);
-        SmartDashboard.putNumber("adValue", kAD);
-    }
 
 
     /**
@@ -131,6 +97,8 @@ public class Reference {
         kATI = jObject.get("kATI").getAsDouble();
         kATD = jObject.get("kATD").getAsDouble();
 
+        RIGHT_ENCODER_MULTIPLIER = jObject.get("RIGHT_ENCODER_MULTIPLIER").getAsDouble();
+
         System.out.println("kP value:" + kP);
         System.out.println("kI value:" + kI);
         System.out.println("kD value:" + kD);
@@ -142,15 +110,34 @@ public class Reference {
         System.out.println("kATP value:" + kATP);
         System.out.println("kATI value:" + kATI);
         System.out.println("kATD value:" + kATD);
+
+        SmartDashboard.putNumber("pvalue", Reference.kP);
+        SmartDashboard.putNumber("ivalue", Reference.kI);
+        SmartDashboard.putNumber("dvalue", Reference.kD);
+
+        SmartDashboard.putNumber("apvalue", Reference.kAP);
+        SmartDashboard.putNumber("aivalue", Reference.kAI);
+        SmartDashboard.putNumber("advalue", Reference.kAD);
+
+        SmartDashboard.putNumber("atpvalue", Reference.kATP);
+        SmartDashboard.putNumber("ativalue", Reference.kATI);
+        SmartDashboard.putNumber("atdvalue", Reference.kATD);
+
+        SmartDashboard.putNumber("rightmultiplier", Reference.RIGHT_ENCODER_MULTIPLIER);
     }
     public static void updatePIDVariables() {
-        kP = SmartDashboard.getNumber("pValue", kP);
-        kI = SmartDashboard.getNumber("iValue", kI);
-        kD = SmartDashboard.getNumber("dValue", kD);
-        kAP = SmartDashboard.getNumber("apValue", kAP);
-        kAI = SmartDashboard.getNumber("aiValue", kAI);
-        kAD = SmartDashboard.getNumber("adValue", kAD);
+        kP = SmartDashboard.getNumber("pvalue", kP);
+        kI = SmartDashboard.getNumber("ivalue", kI);
+        kD = SmartDashboard.getNumber("dvalue", kD);
+        kAP = SmartDashboard.getNumber("apvalue", kAP);
+        kAI = SmartDashboard.getNumber("aivalue", kAI);
+        kAD = SmartDashboard.getNumber("advalue", kAD);
+        kATP = SmartDashboard.getNumber("atpvalue", kATP);
+        kATI = SmartDashboard.getNumber("ativalue", kATI);
+        kATD = SmartDashboard.getNumber("atdvalue", kATD);
 
-        System.out.println("Dash:" + kP + ":" + kI);
+        RIGHT_ENCODER_MULTIPLIER = SmartDashboard.getNumber("rightmultiplier", RIGHT_ENCODER_MULTIPLIER);
+
+        System.out.println("Dash:" + kP + ":" + kI + ":" + kD + ":" + kAP + ":" + kAI + ":" + kAD + ":" + kATP + ":" + kATI + ":" + kATD + ":" + RIGHT_ENCODER_MULTIPLIER);
     }
 }

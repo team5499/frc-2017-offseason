@@ -31,15 +31,6 @@ public class Robot extends IterativeRobot {
         Subsystems.led.setRGB(Subsystems.led.white, true, true);
         // Resets position
         Subsystems.position.reset();
-
-        while(true) {
-            System.out.println("Auto:" + SmartDashboard.getNumber("automode", 0));
-
-            try {
-            Thread.sleep(200);
-            } catch(Exception e) {
-            }
-        }
     }
 
     @Override

@@ -47,12 +47,6 @@
     </article>
     <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
     <aside>
-        <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
-            The <p> below then says the value. -->
-        <div id="example-section">
-            <button id="example-button">Change example value</button>
-            <p id="example-readout">Value is undefined</p>
-        </div>
         <!-- Autonomous selector -->
         <div class="select-container">
             <select id="auto-select">
@@ -62,10 +56,6 @@
             </select>
         </div>
         <div>
-            <p>Adjust arm height</p>
-            <input id="arm-position" type="range" min="0" max="1200" value="770">
-        </div>
-        <div>
             <label for="pVal">P value:</label>
             <input type="text" id="pVal"><br/>
             <label for="iVal">I value:</label>
@@ -73,12 +63,22 @@
             <label for="dVal">D value:</label>
             <input type="text" id="dVal"><br/>
 
-            <label for="pVal">AP value:</label>
+            <label for="apVal">AP value:</label>
             <input type="text" id="apVal"><br/>
-            <label for="iVal">AI value:</label>
+            <label for="aiVal">AI value:</label>
             <input type="text" id="aiVal"><br/>
-            <label for="dVal">AD value:</label>
+            <label for="adVal">AD value:</label>
             <input type="text" id="adVal"><br/>
+
+            <label for="atpVal">AP value:</label>
+            <input type="text" id="atpVal"><br/>
+            <label for="atiVal">AI value:</label>
+            <input type="text" id="atiVal"><br/>
+            <label for="atdVal">AD value:</label>
+            <input type="text" id="atdVal"><br/>
+
+            <label for="multiVal">AD value:</label>
+            <input type="text" id="multiVal"><br/>
 
             <button type="button" id="pidUpdate">UPDATE</button>
         </div>

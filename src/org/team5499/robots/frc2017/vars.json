@@ -14,5 +14,7 @@
  // Angle PID turn(different from angle correction PID)
     "kATP" : 0.01,
     "kATI" : 0.01,
-    "kATD" : 0.0
+    "kATD" : 0.0,
+// Right encoder multiplier(to correct for wheel error)
+    "RIGHT_ENCODER_MULTIPLIER" : 0.9795
 }

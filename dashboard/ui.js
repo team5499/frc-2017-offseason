@@ -10,13 +10,6 @@ let ui = {
         arm: document.getElementById('gyro-arm'),
         number: document.getElementById('gyro-number')
     },
-    robotDiagram: {
-        arm: document.getElementById('robot-arm')
-    },
-    example: {
-        button: document.getElementById('example-button'),
-        readout: document.getElementById('example-readout').firstChild
-    },
     tuning: {
         list: document.getElementById('tuning'),
         button: document.getElementById('tuning-button'),
@@ -32,10 +25,13 @@ let ui = {
         apVal: document.getElementById('apVal'),
         aiVal: document.getElementById('aiVal'),
         adVal: document.getElementById('adVal'),
+        atpVal: document.getElementById('atpVal'),
+        atiVal: document.getElementById('atiVal'),
+        atdVal: document.getElementById('atdVal'),
+        multiVal: document.getElementById('multiVal'),
         pidUpdate: document.getElementById('pidUpdate'),
     },
     autoSelect: document.getElementById('auto-select'),
-    armPosition: document.getElementById('arm-position'),
     graphDisplay: document.getElementById('graph_display')
 };
 let address = document.getElementById('connect-address'),
@@ -330,11 +326,6 @@ function onValueChanged(key, value, isNew) {
     }
 }
 
-// The rest of the doc is listeners for UI elements being clicked on
-ui.example.button.onclick = function () {
-    // Set NetworkTables values to the opposite of whether button has active class.
-    NetworkTables.putValue('/SmartDashboard/example_variable', this.className != 'active');
-};
 // Reset gyro value to 0 on click
 ui.gyro.container.onclick = function () {
     // Store previous gyro val, will now be subtracted from val for callibration
@@ -367,30 +358,46 @@ ui.autoSelect.onchange = function () {
 };
 
 // Update PID constants
-NetworkTables.addKeyListener('/SmartDashboard/pValue', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/pvalue', (key, value) => {
     ui.pid.pVal.value = value;
 });
-NetworkTables.addKeyListener('/SmartDashboard/iValue', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/ivalue', (key, value) => {
     ui.pid.iVal.value = value;
 });
-NetworkTables.addKeyListener('/SmartDashboard/dValue', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/dvalue', (key, value) => {
     ui.pid.dVal.value = value;
 });
-NetworkTables.addKeyListener('/SmartDashboard/apValue', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/apvalue', (key, value) => {
     ui.pid.apVal.value = value;
 });
-NetworkTables.addKeyListener('/SmartDashboard/aiValue', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/aivalue', (key, value) => {
     ui.pid.aiVal.value = value;
 });
-NetworkTables.addKeyListener('/SmartDashboard/adValue', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/advalue', (key, value) => {
     ui.pid.adVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/atpvalue', (key, value) => {
+    ui.pid.atpVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/ativalue', (key, value) => {
+    ui.pid.atiVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/atdvalue', (key, value) => {
+    ui.pid.atdVal.value = value;
+});
+NetworkTables.addKeyListener('/SmartDashboard/rightmultiplier', (key, value) => {
+    ui.pid.multiVal.value = value;
 });
 
 ui.pid.pidUpdate.onclick = function () {
-    NetworkTables.putValue('/SmartDashboard/pValue', parseFloat(ui.pid.pVal.value));
-    NetworkTables.putValue('/SmartDashboard/iValue', parseFloat(ui.pid.iVal.value));
-    NetworkTables.putValue('/SmartDashboard/dValue', parseFloat(ui.pid.dVal.value));
-    NetworkTables.putValue('/SmartDashboard/apValue', parseFloat(ui.pid.apVal.value));
-    NetworkTables.putValue('/SmartDashboard/aiValue', parseFloat(ui.pid.aiVal.value));
-    NetworkTables.putValue('/SmartDashboard/adValue', parseFloat(ui.pid.adVal.value));
+    NetworkTables.putValue('/SmartDashboard/pvalue', parseFloat(ui.pid.pVal.value));
+    NetworkTables.putValue('/SmartDashboard/ivalue', parseFloat(ui.pid.iVal.value));
+    NetworkTables.putValue('/SmartDashboard/dvalue', parseFloat(ui.pid.dVal.value));
+    NetworkTables.putValue('/SmartDashboard/apvalue', parseFloat(ui.pid.apVal.value));
+    NetworkTables.putValue('/SmartDashboard/aivalue', parseFloat(ui.pid.aiVal.value));
+    NetworkTables.putValue('/SmartDashboard/advalue', parseFloat(ui.pid.adVal.value));
+    NetworkTables.putValue('/SmartDashboard/atpvalue', parseFloat(ui.pid.atpVal.value));
+    NetworkTables.putValue('/SmartDashboard/ativalue', parseFloat(ui.pid.atiVal.value));
+    NetworkTables.putValue('/SmartDashboard/atdvalue', parseFloat(ui.pid.atdVal.value));
+    NetworkTables.putValue('/SmartDashboard/rightmultiplier', parseFloat(ui.pid.multiVal.value));
 };
