@@ -20,7 +20,7 @@ public class TimedDriveCommand extends GenericCommand {
     public void start() {
         super.start();
         startTime = Timer.getFPGATimestamp();
-        Subsystems.drivetrain.drive(speed, speed);
+        Subsystems.drivetrain.drive(speed, speed * 0.95); // worked at 0.960
     }
 
     public void handle() {

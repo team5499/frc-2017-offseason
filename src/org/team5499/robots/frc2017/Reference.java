@@ -50,8 +50,8 @@ public class Reference {
     public static final int BLUE_PORT = 6;
 
     // Input Ports
-    public static final int CODRIVER_PORT = 0;
-    public static final int DRIVER_PORT = 1;
+    public static final int DRIVER_PORT = 0;
+    public static final int CODRIVER_PORT = 1;
     public static final int WHEEL_PORT = 2;
     public static final int JOYSTICK_PORT = 3;
 
@@ -80,6 +80,16 @@ public class Reference {
     * Gets PID values from vars.json file
     */
     public static void initPIDVariables() {
+        try {
+            jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        jParser = new JsonParser();
+        pTree = jParser.parse(jReader);
+        jObject = pTree.getAsJsonObject();
+
         kP = jObject.get("kP").getAsDouble();
         kI = jObject.get("kI").getAsDouble();
         kD = jObject.get("kD").getAsDouble();
