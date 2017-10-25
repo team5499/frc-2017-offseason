@@ -15,6 +15,7 @@ public class Reference {
     private static JsonObject jObject;
 
     static {
+        /*
         try {
             jReader = new JsonReader(new FileReader(VAR_FILE_PATH));
         } catch(Exception e) {
@@ -24,6 +25,7 @@ public class Reference {
         jParser = new JsonParser();
         pTree = jParser.parse(jReader);
         jObject = pTree.getAsJsonObject();
+        */
 
         initPIDVariables();
     }

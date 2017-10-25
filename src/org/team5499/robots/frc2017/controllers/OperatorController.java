@@ -32,7 +32,8 @@ public class OperatorController {
         Subsystems.climber.setClimb(Subsystems.inputs.getClimb());
         Subsystems.gearmech.setArm(Subsystems.inputs.getArm());
         Subsystems.gearmech.setRoller(Subsystems.inputs.getRoller());
-        if(Subsystems.accel.getY() > 0.2) Subsystems.led.rotateColors(500);
+        Subsystems.led.setRGB(Subsystems.led.off, true, true);
+        if(Subsystems.accel.getY() > 1.0) Subsystems.led.rotateColors(500);
         if(Subsystems.gearmech.detectGear()) Subsystems.led.flash(Subsystems.led.white);
     }
 }
