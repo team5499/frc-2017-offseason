@@ -17,8 +17,6 @@ public class Reference {
     private static JsonElement pTree;
     private static JsonObject jObject;
 
-<<<<<<< HEAD
-=======
     static {
         /*
         try {
@@ -35,7 +33,6 @@ public class Reference {
         initPIDVariables();
     }
 
->>>>>>> af3672c2725352156db7f18f45afa41dd5f0f94a
     // Talon Ports
     public static final int LEFT1_PORT = 1;
     public static final int LEFT2_PORT = 2;
