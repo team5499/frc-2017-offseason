@@ -62,6 +62,7 @@ public class Robot extends IterativeRobot {
     
 	@Override
 	public void disabledPeriodic() {
+        Subsystems.led.rotateColors(1000);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class Robot extends IterativeRobot {
         Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
         Subsystems.encoders.reset();
         Subsystems.angle.reset();
-
+        Subsystems.led.setRGB(Subsystems.led.off, true, true);
         autoController.Start();
     }
 
