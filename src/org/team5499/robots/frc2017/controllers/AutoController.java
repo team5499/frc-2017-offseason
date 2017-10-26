@@ -34,7 +34,7 @@ public class AutoController {
         timedBaseline = new Routine();
 
         // center auto
-        center.addCommand(new DriveCommand(3,80));
+        center.addCommand(new DriveCommand(5,80));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         center.addCommand(new DriveCommand(2, -40));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
@@ -44,7 +44,13 @@ public class AutoController {
         left.addCommand(new TurnCommand(6, 60));
 
         // Right auto
-        right.addCommand(new DoNothingCommand(2));
+        right.addCommand(new DriveCommand(4, 72));
+        right.addCommand(new TurnCommand(2, -60));
+        right.addCommand(new DriveCommand(4, 72));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
+        right.addCommand(new DriveCommand(2, -40));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Test
         test.addCommand(new DoNothingCommand(2));

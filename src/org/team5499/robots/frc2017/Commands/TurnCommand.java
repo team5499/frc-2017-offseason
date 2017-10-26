@@ -1,6 +1,7 @@
 package org.team5499.robots.frc2017.commands;
 
 import org.team5499.robots.frc2017.commands.GenericCommand;
+import org.team5499.robots.frc2017.Reference;
 import org.team5499.robots.frc2017.subsystems.*;
 
 public class TurnCommand extends GenericCommand {
@@ -15,6 +16,7 @@ public class TurnCommand extends GenericCommand {
     @Override
     public void start() {
         super.start();
+        Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
         Subsystems.anglePID.setSetpoint(setPoint);
     }
 
@@ -25,8 +27,8 @@ public class TurnCommand extends GenericCommand {
         
         System.out.println("Actual:" + driveOutput);
 
-        if(Math.abs(driveOutput) > 0.4) {
-            driveOutput = (driveOutput < 0)?-0.4:0.4;
+        if(Math.abs(driveOutput) > 0.2) {
+            driveOutput = (driveOutput < 0)?-0.2:0.2;
         }
 
         System.out.println("Error:" + Subsystems.anglePID.getError() + " Output:" + driveOutput);
@@ -36,6 +38,13 @@ public class TurnCommand extends GenericCommand {
 
     @Override
     public boolean isFinished() {
+        if(super.isFinished()) {
+            Subsystems.anglePID.setPID(Reference.kATP, Reference.kATI, Reference.kATD);
+            Subsystems.encoders.reset();
+            Subsystems.angle.resetLastDistances();
+            Subsystems.leftPID.reset();
+            Subsystems.rightPID.reset();
+        }
         return super.isFinished();
     }
 
