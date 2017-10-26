@@ -56,7 +56,7 @@ public class AutoController {
         test.addCommand(new DoNothingCommand(2));
 
         // Timed Center Auto
-        timedCenter.addCommand(new TimedDriveCommand(3, 1.65, -0.3));
+        timedCenter.addCommand(new TimedDriveCommand(3, 1.5, -0.3));
         timedCenter.addCommand(new GearmechCommand(0.5, GearmechCommand.Direction.DOWN));
         timedCenter.addCommand(new TimedDriveCommand(1, 2, 0.3));
         timedCenter.addCommand(new GearmechCommand(0.1, GearmechCommand.Direction.NONE));
@@ -86,7 +86,7 @@ public class AutoController {
         // Timed Center Baseline
         timedBaseline.addCommand(new TimedDriveCommand(1, 10, -0.3));
 
-        autoChoice = 0;
+        autoChoice = 4;
         SmartDashboard.putNumber("automode", autoChoice);
     }
 
