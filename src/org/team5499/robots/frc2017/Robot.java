@@ -10,7 +10,6 @@ public class Robot extends IterativeRobot {
 
     private OperatorController operatorController;
     private AutoController autoController; 
-    private int countS;
 
     public Robot() {
         /*
