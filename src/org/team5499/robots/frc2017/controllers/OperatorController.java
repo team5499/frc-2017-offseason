@@ -38,7 +38,7 @@ public class OperatorController {
         Subsystems.gearmech.setArm(Subsystems.inputs.getArm());
         Subsystems.gearmech.setRoller(Subsystems.inputs.getRoller());
         Subsystems.led.setRGB(Subsystems.led.off, true, true);
-        if(Subsystems.accel.getY() > 1.0) Subsystems.led.rotateColors(400);
+        // if(Subsystems.accel.getY() > 1.0) Subsystems.led.rotateColors(400);
         if(Subsystems.gearmech.detectGear()) Subsystems.led.flash(Subsystems.led.white);
     }
 
