@@ -62,7 +62,7 @@ public class Robot extends IterativeRobot {
     
 	@Override
 	public void disabledPeriodic() {
-        //Subsystems.led.rotateColors(1000);
+        Subsystems.led.rotateColors(1000);
     }
 
     @Override
