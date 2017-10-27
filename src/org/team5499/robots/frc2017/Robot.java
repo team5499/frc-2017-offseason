@@ -39,6 +39,7 @@ public class Robot extends IterativeRobot {
         Subsystems.angle.handle(Subsystems.encoders.getLeftDistance(), Subsystems.encoders.getRightDistance());
         // Handle the state of the LEDs
         Subsystems.led.handle();
+        
     }
 
     @Override
@@ -63,6 +64,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
         Subsystems.led.rotateColors(1000);
+        if(Subsystems.inputs.autoSelector()) autoController.incrementRoutine();
     }
 
     @Override

@@ -18,6 +18,7 @@ public class AutoController {
     private Routine timedCenter, timedLeft, timedRight, timedBaseline;
     private Routine currRoutine;
     private int autoChoice;
+    private final int numberRoutines = 8;
 
     public AutoController() {
 
@@ -86,7 +87,28 @@ public class AutoController {
 
     public void Start() {
         System.out.println("Auto Controller started");
-        autoChoice = (int) SmartDashboard.getNumber("automode", 1);
+        // autoChoice = (int) SmartDashboard.getNumber("automode", 1);
+        changeRoutine();
+        currRoutine.start();
+    }
+
+
+    public void Handle() {
+        currRoutine.handle();
+    }
+
+    public void reset() {
+        Subsystems.climber.stop();
+        Subsystems.gearmech.stop();
+        Subsystems.drivetrain.stop();
+
+        left.reset();
+        center.reset();
+        right.reset();
+        test.reset();
+    }
+
+    private void changeRoutine() {
         switch(autoChoice) {
             case 0:
                 currRoutine = center;
@@ -124,23 +146,11 @@ public class AutoController {
                 System.err.println("ERROR: Auto selected not found");
                 break;
         }
-        currRoutine.start();
     }
 
-
-    public void Handle() {
-        currRoutine.handle();
-    }
-
-    public void reset() {
-        Subsystems.climber.stop();
-        Subsystems.gearmech.stop();
-        Subsystems.drivetrain.stop();
-
-        left.reset();
-        center.reset();
-        right.reset();
-        test.reset();
+    public void incrementRoutine() {
+        autoChoice = (autoChoice++ < numberRoutines ? autoChoice + 1 : 0);
+        changeRoutine();
     }
     
 }

@@ -4,11 +4,14 @@ import org.team5499.robots.frc2017.Reference;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Inputs {
 
     public XboxController driver, codriver;
     public Joystick wheel, throttle;
+    public boolean nextAuto;
+    public double lastTimeAuto;
 
 
     /**
@@ -19,6 +22,7 @@ public class Inputs {
         codriver = new XboxController(Reference.CODRIVER_PORT);
         wheel = new Joystick(Reference.WHEEL_PORT);
         throttle = new Joystick(Reference.JOYSTICK_PORT);
+        nextAuto = true;
     }
     
     /**
@@ -72,19 +76,7 @@ public class Inputs {
      * Gets speed for roller from codriver's bumpers.
      * @return speed for roller
      */
-    public double getRoller() {
-        /*
-        if(codriver.getBumper(Hand.kLeft)) {
-            return Reference.ROLLER_SPEED;
-        } else if(codriver.getBumper(Hand.kRight)) {
-            return -Reference.ROLLER_SPEED;
-        } else if(codriver.getTriggerAxis(Hand.kLeft) > 0.1) {
-            return Reference.ROLLER_SPEED * 0.3;
-        } else if(codriver.getTriggerAxis(Hand.kRight) > 0.1) {
-            return -Reference.ROLLER_SPEED * 0.3;
-        } else return 0;
-        */
-        
+    public double getRoller() {        
         return (codriver.getBumper(Hand.kLeft) ? Reference.ROLLER_SPEED
         : codriver.getBumper(Hand.kRight) ? -Reference.ROLLER_SPEED
         : codriver.getTriggerAxis(Hand.kLeft) > 0.1 ? Reference.ROLLER_SPEED * 0.3
@@ -129,5 +121,25 @@ public class Inputs {
             return (getThrottle() > 0 ? 0.4 : 0.25);
             
         } else return 1;
+    }
+
+    /**
+     * Cycles through auto modes
+     * @return boolean
+     */
+    public boolean autoSelector() {
+        double currentTimeAuto = Timer.getFPGATimestamp();
+        if(nextAuto) {
+            if(driver.getBumper(Hand.kRight)) {
+                nextAuto = false;
+                return true;
+            }
+        } else {
+            if(currentTimeAuto - lastTimeAuto > 1) {
+                nextAuto = true;
+            }
+        }
+
+        return false;
     }
 }
