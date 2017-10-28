@@ -37,7 +37,7 @@ public class OperatorController {
         Subsystems.climber.setClimb(Subsystems.inputs.getClimb());
         Subsystems.gearmech.setArm(Subsystems.inputs.getArm());
         Subsystems.gearmech.setRoller(Subsystems.inputs.getRoller());
-        System.out.println("Z axis: " + Subsystems.accel.getZ());
+        //System.out.println("Z axis: " + Subsystems.accel.getZ());
         
         if(Subsystems.gearmech.detectGear()) Subsystems.led.flash(Subsystems.led.white);
         if(Subsystems.inputs.getClimb() > 0.5 || Subsystems.inputs.getClimb() < -0.5) Subsystems.led.rotateColors(200);

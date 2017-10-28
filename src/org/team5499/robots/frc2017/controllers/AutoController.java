@@ -17,7 +17,7 @@ public class AutoController {
     private Routine timedCenter, timedLeft, timedRight, timedBaseline;
     private Routine currRoutine;
     private int autoChoice;
-    private final int numberRoutines = 8;
+    private final int numberRoutines = 3;
 
     public AutoController() {
 
@@ -98,8 +98,8 @@ public class AutoController {
 
     public void Start() {
         System.out.println("Auto Controller started");
-        // autoChoice = (int) SmartDashboard.getNumber("automode", 1);
-        changeRoutine();
+        //autoChoice = (int) SmartDashboard.getNumber("automode", 0);
+        //changeRoutine();
         currRoutine.start();
     }
 
@@ -122,12 +122,12 @@ public class AutoController {
     private void changeRoutine() {
         switch(autoChoice) {
             case 0:
-                currRoutine = center;
-                System.out.println("Center auto selected");
-                break;
-            case 1:
                 currRoutine = left;
                 System.out.println("Left auto selected");
+                break;
+            case 1:
+                currRoutine = center;
+                System.out.println("Center auto selected");
                 break;
             case 2:
                 currRoutine = right;
@@ -162,6 +162,13 @@ public class AutoController {
     public void incrementRoutine() {
         autoChoice = (autoChoice+1 < numberRoutines ? autoChoice + 1 : 0);
         changeRoutine();
+    }
+
+    public void checkAuto() {
+        if(autoChoice != SmartDashboard.getNumber("automode", autoChoice)) {
+            //autoChoice = (int) SmartDashboard.getNumber("automode", autoChoice);
+            //changeRoutine();
+        }
     }
     
 }

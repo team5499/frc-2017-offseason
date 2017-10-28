@@ -47,7 +47,7 @@ public class DriveCommand extends GenericCommand {
 
         Subsystems.drivetrain.drive(-leftDrive - Subsystems.anglePID.getOutput(), -rightDrive + Subsystems.anglePID.getOutput());
 
-        System.out.println("Left error:" + Subsystems.leftPID.getError() + "   Right error:" + Subsystems.rightPID.getError() + "   Angle error:" + Subsystems.anglePID.getError());
+        //System.out.println("Left error:" + Subsystems.leftPID.getError() + "   Right error:" + Subsystems.rightPID.getError() + "   Angle error:" + Subsystems.anglePID.getError());
 
         updateSmartDash();
     }

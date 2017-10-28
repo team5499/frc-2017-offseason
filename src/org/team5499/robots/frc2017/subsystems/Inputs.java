@@ -60,6 +60,7 @@ public class Inputs {
          double a = 0.0;
          a = (codriver.getAButton()) ? -Reference.CLIMB_SPEED
          : codriver.getBButton() ? Reference.CLIMB_SPEED
+         : codriver.getXButton() ? -0.3
          : 0.0;
          return a;
     }
@@ -129,11 +130,11 @@ public class Inputs {
      */
     public boolean autoSelector() {
         if(lastAuto) {
-            if(!driver.getBumper(Hand.kRight)) {
+            if(!driver.getAButton()) {
                 lastAuto = false;
             }
         } else {
-            if(driver.getBumper(Hand.kRight)) {
+            if(driver.getAButton()) {
                 lastAuto = true;
                 return true;
             }

@@ -29,8 +29,8 @@ public class TurnCommand extends GenericCommand {
         
         //System.out.println("Actual:" + driveOutput);
 
-        if(Math.abs(driveOutput) > 0.2) {
-            driveOutput = (driveOutput < 0)?-0.2:0.2;
+        if(Math.abs(driveOutput) > 0.35) {
+            driveOutput = (driveOutput < 0)?-0.35:0.35;
         }
 
         Subsystems.drivetrain.drive(-driveOutput, driveOutput);
