@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 import org.team5499.robots.frc2017.commands.DriveCommand;
 import org.team5499.robots.frc2017.commands.GearmechCommand;
-import org.team5499.robots.frc2017.commands.DoNothingCommand;
 import org.team5499.robots.frc2017.commands.TurnCommand;
 import org.team5499.robots.frc2017.commands.Routine;
 import org.team5499.robots.frc2017.commands_timed.TimedDriveCommand;
@@ -42,13 +41,25 @@ public class AutoController {
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Left auto
-        left.addCommand(new TurnCommand(6, 60));
+        left.addCommand(new DriveCommand(4, 70));
+        left.addCommand(new TurnCommand(2, 60));
+        left.addCommand(new DriveCommand(4, 66));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
+        left.addCommand(new DriveCommand(2, -40));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Right auto
-        right.addCommand(new DoNothingCommand(2));
+        right.addCommand(new DriveCommand(4, 70));
+        right.addCommand(new TurnCommand(2, -60));
+        right.addCommand(new DriveCommand(4, 66));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
+        right.addCommand(new DriveCommand(2, -40));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Test
-        test.addCommand(new DoNothingCommand(2));
+        test.addCommand(new TurnCommand(3, -60));
 
         // Timed Center Auto
         timedCenter.addCommand(new TimedDriveCommand(3, 1.5, -0.3));
@@ -87,6 +98,7 @@ public class AutoController {
 
     public void Start() {
         System.out.println("Auto Controller started");
+<<<<<<< HEAD
         // autoChoice = (int) SmartDashboard.getNumber("automode", 1);
         changeRoutine();
         currRoutine.start();
@@ -109,6 +121,9 @@ public class AutoController {
     }
 
     private void changeRoutine() {
+=======
+        autoChoice = (int) SmartDashboard.getNumber("automode", 0);
+>>>>>>> master
         switch(autoChoice) {
             case 0:
                 currRoutine = center;
