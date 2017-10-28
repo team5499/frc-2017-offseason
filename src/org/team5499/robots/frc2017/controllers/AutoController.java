@@ -98,7 +98,6 @@ public class AutoController {
 
     public void Start() {
         System.out.println("Auto Controller started");
-<<<<<<< HEAD
         // autoChoice = (int) SmartDashboard.getNumber("automode", 1);
         changeRoutine();
         currRoutine.start();
@@ -121,9 +120,6 @@ public class AutoController {
     }
 
     private void changeRoutine() {
-=======
-        autoChoice = (int) SmartDashboard.getNumber("automode", 0);
->>>>>>> master
         switch(autoChoice) {
             case 0:
                 currRoutine = center;

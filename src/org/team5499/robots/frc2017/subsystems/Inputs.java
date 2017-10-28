@@ -22,7 +22,7 @@ public class Inputs {
         codriver = new XboxController(Reference.CODRIVER_PORT);
         wheel = new Joystick(Reference.WHEEL_PORT);
         throttle = new Joystick(Reference.JOYSTICK_PORT);
-        nextAuto = true;
+        lastAuto = false;
     }
     
     /**
