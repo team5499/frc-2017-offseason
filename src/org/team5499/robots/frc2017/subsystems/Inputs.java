@@ -10,8 +10,8 @@ public class Inputs {
 
     public XboxController driver, codriver;
     public Joystick wheel, throttle;
-    public boolean nextAuto;
-    public double lastTimeAuto;
+    public boolean lastAuto;
+
 
 
     /**
@@ -128,15 +128,14 @@ public class Inputs {
      * @return boolean
      */
     public boolean autoSelector() {
-        double currentTimeAuto = Timer.getFPGATimestamp();
-        if(nextAuto) {
-            if(driver.getBumper(Hand.kRight)) {
-                nextAuto = false;
-                return true;
+        if(lastAuto) {
+            if(!driver.getBumper(Hand.kRight)) {
+                lastAuto = false;
             }
         } else {
-            if(currentTimeAuto - lastTimeAuto > 1) {
-                nextAuto = true;
+            if(driver.getBumper(Hand.kRight)) {
+                lastAuto = true;
+                return true;
             }
         }
 
