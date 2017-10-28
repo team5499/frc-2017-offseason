@@ -43,8 +43,8 @@ public class Inputs {
      * @return Multiplier for the wheel speed
      */
     public double isSlow() {
-        return (driver.getTrigger(Hand.kRight) ? Reference.SLOW_MULTIPLIER // Kinda Slow
-        : driver.getTrigger(Hand.kLeft) ? Reference.SLOW_MULTIPLIER / 2 // Really Slow
+        return (driver.getTriggerAxis(Hand.kRight) > 0.1? Reference.SLOW_MULTIPLIER // Kinda Slow
+        : driver.getTriggerAxis(Hand.kLeft) > 0.1? Reference.SLOW_MULTIPLIER / 2 // Really Slow
         : 1.0); // Normal Speed / Not Slow
     }
 
@@ -73,9 +73,24 @@ public class Inputs {
      * @return speed for roller
      */
     public double getRoller() {
+        /*
+        if(codriver.getBumper(Hand.kLeft)) {
+            return Reference.ROLLER_SPEED;
+        } else if(codriver.getBumper(Hand.kRight)) {
+            return -Reference.ROLLER_SPEED;
+        } else if(codriver.getTriggerAxis(Hand.kLeft) > 0.1) {
+            return Reference.ROLLER_SPEED * 0.3;
+        } else if(codriver.getTriggerAxis(Hand.kRight) > 0.1) {
+            return -Reference.ROLLER_SPEED * 0.3;
+        } else return 0;
+        */
+        
         return (codriver.getBumper(Hand.kLeft) ? Reference.ROLLER_SPEED
         : codriver.getBumper(Hand.kRight) ? -Reference.ROLLER_SPEED
+        : codriver.getTriggerAxis(Hand.kLeft) > 0.1 ? Reference.ROLLER_SPEED * 0.3
+        : codriver.getTriggerAxis(Hand.kRight) > 0.1 ? -Reference.ROLLER_SPEED * 0.3
         : 0.0);
+        
     }
 
     /** 
