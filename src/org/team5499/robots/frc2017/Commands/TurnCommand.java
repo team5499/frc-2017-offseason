@@ -21,27 +21,19 @@ public class TurnCommand extends GenericCommand {
     }
 
     public void handle() {
-        Subsystems.leftPID.setSetpoint(-(Subsystems.encoders.getRightDistance()-Subsystems.leftPID.getSetpoint()));
-        Subsystems.rightPID.setSetpoint(-(Subsystems.encoders.getLeftDistance()-Subsystems.rightPID.getSetpoint()));
 
         Subsystems.anglePID.setInput(Subsystems.angle.getAngle());
-        Subsystems.leftPID.setInput(Subsystems.encoders.getLeftDistance());
-        Subsystems.rightPID.setInput(Subsystems.encoders.getRightDistance());
 
         Subsystems.anglePID.calculate();
-        Subsystems.leftPID.calculate();
-        Subsystems.rightPID.calculate();
         double driveOutput = Subsystems.anglePID.getOutput();
         
-        System.out.println("Actual:" + driveOutput);
+        //System.out.println("Actual:" + driveOutput);
 
         if(Math.abs(driveOutput) > 0.2) {
             driveOutput = (driveOutput < 0)?-0.2:0.2;
         }
 
-        System.out.println("Error:" + Subsystems.anglePID.getError() + " Output:" + driveOutput);
-
-        Subsystems.drivetrain.drive(-driveOutput+Subsystems.leftPID.getOutput(), driveOutput+Subsystems.rightPID.getOutput());
+        Subsystems.drivetrain.drive(-driveOutput, driveOutput);
     }
 
     @Override

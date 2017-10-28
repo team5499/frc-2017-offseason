@@ -56,6 +56,10 @@ public class PID {
         return sp - pv;
     }
 
+    public double getProcessValue() {
+        return pv;
+    }
+
     public double getRate(){
         return (pv - prev_pv)/(Timer.getFPGATimestamp() - last_input_time);
     }

@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 import org.team5499.robots.frc2017.commands.DriveCommand;
 import org.team5499.robots.frc2017.commands.GearmechCommand;
-import org.team5499.robots.frc2017.commands.DoNothingCommand;
 import org.team5499.robots.frc2017.commands.TurnCommand;
 import org.team5499.robots.frc2017.commands.Routine;
 import org.team5499.robots.frc2017.commands_timed.TimedDriveCommand;
@@ -34,26 +33,32 @@ public class AutoController {
         timedBaseline = new Routine();
 
         // center auto
-        center.addCommand(new DriveCommand(5,80));
+        center.addCommand(new DriveCommand(3,80));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         center.addCommand(new DriveCommand(2, -40));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Left auto
-        left.addCommand(new TurnCommand(6, 60));
+        left.addCommand(new DriveCommand(4, 70));
+        left.addCommand(new TurnCommand(2, 60));
+        left.addCommand(new DriveCommand(4, 66));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
+        left.addCommand(new DriveCommand(2, -40));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Right auto
-        right.addCommand(new DriveCommand(4, 72));
+        right.addCommand(new DriveCommand(4, 70));
         right.addCommand(new TurnCommand(2, -60));
-        right.addCommand(new DriveCommand(4, 72));
+        right.addCommand(new DriveCommand(4, 66));
         right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
         right.addCommand(new DriveCommand(2, -40));
         right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
         right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Test
-        test.addCommand(new DoNothingCommand(2));
+        test.addCommand(new TurnCommand(3, -60));
 
         // Timed Center Auto
         timedCenter.addCommand(new TimedDriveCommand(3, 1.5, -0.3));
@@ -86,13 +91,13 @@ public class AutoController {
         // Timed Center Baseline
         timedBaseline.addCommand(new TimedDriveCommand(1, 10, -0.3));
 
-        autoChoice = 4;
+        autoChoice = 0;
         SmartDashboard.putNumber("automode", autoChoice);
     }
 
     public void Start() {
         System.out.println("Auto Controller started");
-        autoChoice = (int) SmartDashboard.getNumber("automode", 1);
+        autoChoice = (int) SmartDashboard.getNumber("automode", 0);
         switch(autoChoice) {
             case 0:
                 currRoutine = center;
