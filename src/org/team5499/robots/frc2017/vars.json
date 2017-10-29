@@ -17,5 +17,5 @@
     "kATD" : 0.002,
 // Right encoder multiplier(to correct for wheel error)
 // was 0.97795, is now 0.9773
-    "RIGHT_ENCODER_MULTIPLIER" : 0.97795
+    "RIGHT_ENCODER_MULTIPLIER" : 0.9760
 }
