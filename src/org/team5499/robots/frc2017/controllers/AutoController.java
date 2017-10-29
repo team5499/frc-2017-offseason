@@ -92,7 +92,8 @@ public class AutoController {
         // Timed Center Baseline
         timedBaseline.addCommand(new TimedDriveCommand(1, 10, -0.3));
 
-        autoChoice = 0;
+        autoChoice = 1;
+        changeRoutine();
         SmartDashboard.putNumber("automode", autoChoice);
     }
 

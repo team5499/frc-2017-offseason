@@ -26,7 +26,7 @@ public class GearmechCommand extends GenericCommand {
     public void handle() {
         switch(dir) {
             case UP:
-                Subsystems.gearmech.setArm(0.3);
+                Subsystems.gearmech.setArm(0.5);
                 break;
             case DOWN:
                 Subsystems.gearmech.setArm(-0.5);

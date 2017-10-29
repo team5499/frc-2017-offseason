@@ -16,7 +16,7 @@ public class TurnCommand extends GenericCommand {
     @Override
     public void start() {
         super.start();
-        Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
+        Subsystems.anglePID.setPID(Reference.kATP, Reference.kATI, Reference.kATD);
         Subsystems.anglePID.setSetpoint(setPoint);
     }
 
@@ -39,7 +39,7 @@ public class TurnCommand extends GenericCommand {
     @Override
     public boolean isFinished() {
         if(super.isFinished()) {
-            Subsystems.anglePID.setPID(Reference.kATP, Reference.kATI, Reference.kATD);
+            Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
             Subsystems.encoders.reset();
             Subsystems.angle.resetLastDistances();
             Subsystems.leftPID.reset();

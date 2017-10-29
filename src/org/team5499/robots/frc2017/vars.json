@@ -7,14 +7,15 @@
     "kD" : 0.0,
 
  // Angle PID constants 
-    "kAP" : 0.06,
+    "kAP" : 0.16,
     "kAI" : 0.0,
     "kAD" : 0.004,
 
  // Angle PID turn(different from angle correction PID)
-    "kATP" : 0.06,
+    "kATP" : 0.12,
     "kATI" : 0.0001,
     "kATD" : 0.002,
 // Right encoder multiplier(to correct for wheel error)
-    "RIGHT_ENCODER_MULTIPLIER" : 0.9782
+// was 0.97795, is now 0.9773
+    "RIGHT_ENCODER_MULTIPLIER" : 0.97795
 }
