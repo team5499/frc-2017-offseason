@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team5499.robots.frc2017.subsystems.Subsystems;
 import org.team5499.robots.frc2017.commands.DriveCommand;
 import org.team5499.robots.frc2017.commands.GearmechCommand;
-import org.team5499.robots.frc2017.commands.DoNothingCommand;
 import org.team5499.robots.frc2017.commands.TurnCommand;
 import org.team5499.robots.frc2017.commands.Routine;
 import org.team5499.robots.frc2017.commands_timed.TimedDriveCommand;
@@ -18,6 +17,7 @@ public class AutoController {
     private Routine timedCenter, timedLeft, timedRight, timedBaseline;
     private Routine currRoutine;
     private int autoChoice;
+    private final int numberRoutines = 3;
 
     public AutoController() {
 
@@ -41,16 +41,28 @@ public class AutoController {
         center.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Left auto
-        left.addCommand(new TurnCommand(6, 60));
+        left.addCommand(new DriveCommand(4, 70));
+        left.addCommand(new TurnCommand(2, 60));
+        left.addCommand(new DriveCommand(4, 66));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
+        left.addCommand(new DriveCommand(2, -40));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
+        left.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Right auto
-        right.addCommand(new DoNothingCommand(2));
+        right.addCommand(new DriveCommand(4, 70));
+        right.addCommand(new TurnCommand(2, -60));
+        right.addCommand(new DriveCommand(4, 66));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.DOWN));
+        right.addCommand(new DriveCommand(2, -40));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.UP));
+        right.addCommand(new GearmechCommand(1, GearmechCommand.Direction.NONE));
 
         // Test
-        test.addCommand(new DoNothingCommand(2));
+        test.addCommand(new TurnCommand(3, -60));
 
         // Timed Center Auto
-        timedCenter.addCommand(new TimedDriveCommand(3, 1.65, -0.3));
+        timedCenter.addCommand(new TimedDriveCommand(3, 1.5, -0.3));
         timedCenter.addCommand(new GearmechCommand(0.5, GearmechCommand.Direction.DOWN));
         timedCenter.addCommand(new TimedDriveCommand(1, 2, 0.3));
         timedCenter.addCommand(new GearmechCommand(0.1, GearmechCommand.Direction.NONE));
@@ -86,15 +98,36 @@ public class AutoController {
 
     public void Start() {
         System.out.println("Auto Controller started");
-        autoChoice = (int) SmartDashboard.getNumber("automode", 1);
+        //autoChoice = (int) SmartDashboard.getNumber("automode", 0);
+        //changeRoutine();
+        currRoutine.start();
+    }
+
+
+    public void Handle() {
+        currRoutine.handle();
+    }
+
+    public void reset() {
+        Subsystems.climber.stop();
+        Subsystems.gearmech.stop();
+        Subsystems.drivetrain.stop();
+
+        left.reset();
+        center.reset();
+        right.reset();
+        test.reset();
+    }
+
+    private void changeRoutine() {
         switch(autoChoice) {
             case 0:
-                currRoutine = center;
-                System.out.println("Center auto selected");
-                break;
-            case 1:
                 currRoutine = left;
                 System.out.println("Left auto selected");
+                break;
+            case 1:
+                currRoutine = center;
+                System.out.println("Center auto selected");
                 break;
             case 2:
                 currRoutine = right;
@@ -124,23 +157,18 @@ public class AutoController {
                 System.err.println("ERROR: Auto selected not found");
                 break;
         }
-        currRoutine.start();
     }
 
-
-    public void Handle() {
-        currRoutine.handle();
+    public void incrementRoutine() {
+        autoChoice = (autoChoice+1 < numberRoutines ? autoChoice + 1 : 0);
+        changeRoutine();
     }
 
-    public void reset() {
-        Subsystems.climber.stop();
-        Subsystems.gearmech.stop();
-        Subsystems.drivetrain.stop();
-
-        left.reset();
-        center.reset();
-        right.reset();
-        test.reset();
+    public void checkAuto() {
+        if(autoChoice != SmartDashboard.getNumber("automode", autoChoice)) {
+            //autoChoice = (int) SmartDashboard.getNumber("automode", autoChoice);
+            //changeRoutine();
+        }
     }
     
 }

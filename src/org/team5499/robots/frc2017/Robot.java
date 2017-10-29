@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
         // Reset the encoder position to 0
         Subsystems.encoders.reset();
         // Set the LEDs to white
-        Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        //Subsystems.led.setRGB(Subsystems.led.white, true, true);
         // Resets position
         Subsystems.position.reset();
     }
@@ -38,13 +38,15 @@ public class Robot extends IterativeRobot {
         // Integrate the angle the entire time the robot is running
         Subsystems.angle.handle(Subsystems.encoders.getLeftDistance(), Subsystems.encoders.getRightDistance());
         // Handle the state of the LEDs
-        Subsystems.led.handle();
+        //Subsystems.led.handle();
+        
+        //System.out.println("Auto mode:" + SmartDashboard.getNumber("automode", 0));
     }
 
     @Override
 	public void disabledInit() {
         // Update the PID variables when the robot is disabled
-        Reference.updatePIDVariables();
+        Reference.initPIDVariables();
         Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
@@ -57,23 +59,28 @@ public class Robot extends IterativeRobot {
         // Reset the autocontroller when the robot is disabled
         // This means the robot code doesn't need to be restarted everytime auto is run
         autoController.reset();
-        SmartDashboard.putBoolean("reset_graph", true);
+        //SmartDashboard.putBoolean("reset_graph", true);
+        SmartDashboard.putBoolean("time_running", false);
     }
     
 	@Override
 	public void disabledPeriodic() {
+        //Subsystems.led.rotateColors(1000);
+        //autoController.checkAuto();
+        if(Subsystems.inputs.autoSelector()) autoController.incrementRoutine();
+        //Reference.updatePIDVariables();
     }
 
     @Override
     public void autonomousInit() {
         SmartDashboard.putBoolean("reset_graph", false);
-        Reference.updatePIDVariables();
+        Reference.initPIDVariables();
         Subsystems.leftPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.rightPID.setPID(Reference.kP, Reference.kI, Reference.kD);
         Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
         Subsystems.encoders.reset();
         Subsystems.angle.reset();
-
+        //Subsystems.led.setRGB(Subsystems.led.off, true, true);
         autoController.Start();
     }
 
@@ -85,7 +92,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        Subsystems.led.setRGB(Subsystems.led.off, true, true);
+        //Subsystems.led.setRGB(Subsystems.led.off, true, true);
         operatorController.Start();
         // Let the smart dashboard know that teleop has begun
         SmartDashboard.putBoolean("time_running", true);

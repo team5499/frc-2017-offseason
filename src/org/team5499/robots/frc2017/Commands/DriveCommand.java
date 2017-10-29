@@ -19,6 +19,7 @@ public class DriveCommand extends GenericCommand {
     @Override
     public void start() {
         super.start();
+        Subsystems.anglePID.setPID(Reference.kATP, Reference.kATI, Reference.kATD);
         Subsystems.leftPID.setSetpoint(m_setpoint);
         Subsystems.rightPID.setSetpoint(m_setpoint);
         Subsystems.anglePID.setSetpoint(0);
@@ -46,12 +47,17 @@ public class DriveCommand extends GenericCommand {
 
         Subsystems.drivetrain.drive(-leftDrive - Subsystems.anglePID.getOutput(), -rightDrive + Subsystems.anglePID.getOutput());
 
+        //System.out.println("Left error:" + Subsystems.leftPID.getError() + "   Right error:" + Subsystems.rightPID.getError() + "   Angle error:" + Subsystems.anglePID.getError());
+
         updateSmartDash();
     }
 
 
     @Override
     public boolean isFinished() {
+        if(super.isFinished()) {
+            Subsystems.anglePID.setPID(Reference.kAP, Reference.kAI, Reference.kAD);
+        }
         return super.isFinished();
     }
 

@@ -37,6 +37,8 @@ let ui = {
 let address = document.getElementById('connect-address'),
     connect = document.getElementById('connect');
 
+var countdown = 0;
+
 
 /*--SET UP GRAPH--*/
 
@@ -220,7 +222,7 @@ NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
         // Make sure timer is reset to black when it starts
         ui.timer.style.color = 'black';
         // Function below adjusts time left every second
-        var countdown = setInterval(function () {
+        countdown = setInterval(function () {
             s--; // Subtract one second
             // Minutes (m) is equal to the total seconds divided by sixty with the decimal removed.
             var m = Math.floor(s / 60);
@@ -245,6 +247,8 @@ NetworkTables.addKeyListener('/SmartDashboard/time_running', (key, value) => {
         }, 1000);
     }
     else {
+        clearInterval(countdown);
+        ui.timer.firstChild.data = '2:15';
         s = 135;
     }
     NetworkTables.putValue(key, false);

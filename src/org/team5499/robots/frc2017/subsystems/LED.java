@@ -67,11 +67,18 @@ public class LED {
     public void rotateColors(int interval) {
         //Interval is time between colors in milliseconds
         current_time_millis = Timer.getFPGATimestamp() * 1000;
-        
-        if(current_time_millis % interval <= 50 && current_time_millis % interval >= 0) {
-            sequenceIndex = (sequenceIndex < colorSequence.size() ? sequenceIndex += 1 : 0);
-            currentColor = colorSequence.get(sequenceIndex);
+        if(current_time_millis - last_time_millis >= interval){
+            try {
+                sequenceIndex = (sequenceIndex < colorSequence.size() - 1  ? sequenceIndex += 1 : 0);
+                currentColor = colorSequence.get(sequenceIndex);
+            } catch(IndexOutOfBoundsException e) {
+                e.printStackTrace();
+                System.err.println("ERROR: Your LED class is fucked up!");
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
             setRGB(currentColor, true, true);
+            last_time_millis = current_time_millis;
         }
     }
 

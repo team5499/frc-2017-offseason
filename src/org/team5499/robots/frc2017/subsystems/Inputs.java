@@ -4,11 +4,14 @@ import org.team5499.robots.frc2017.Reference;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Inputs {
 
     public XboxController driver, codriver;
     public Joystick wheel, throttle;
+    public boolean lastAuto;
+
 
 
     /**
@@ -19,6 +22,7 @@ public class Inputs {
         codriver = new XboxController(Reference.CODRIVER_PORT);
         wheel = new Joystick(Reference.WHEEL_PORT);
         throttle = new Joystick(Reference.JOYSTICK_PORT);
+        lastAuto = false;
     }
     
     /**
@@ -43,8 +47,8 @@ public class Inputs {
      * @return Multiplier for the wheel speed
      */
     public double isSlow() {
-        return (driver.getTrigger(Hand.kRight) ? Reference.SLOW_MULTIPLIER // Kinda Slow
-        : driver.getTrigger(Hand.kLeft) ? Reference.SLOW_MULTIPLIER / 2 // Really Slow
+        return (driver.getTriggerAxis(Hand.kRight) > 0.1? Reference.SLOW_MULTIPLIER // Kinda Slow
+        : driver.getTriggerAxis(Hand.kLeft) > 0.1? Reference.SLOW_MULTIPLIER / 2 // Really Slow
         : 1.0); // Normal Speed / Not Slow
     }
 
@@ -56,6 +60,7 @@ public class Inputs {
          double a = 0.0;
          a = (codriver.getAButton()) ? -Reference.CLIMB_SPEED
          : codriver.getBButton() ? Reference.CLIMB_SPEED
+         : codriver.getXButton() ? -0.3
          : 0.0;
          return a;
     }
@@ -72,10 +77,13 @@ public class Inputs {
      * Gets speed for roller from codriver's bumpers.
      * @return speed for roller
      */
-    public double getRoller() {
+    public double getRoller() {        
         return (codriver.getBumper(Hand.kLeft) ? Reference.ROLLER_SPEED
         : codriver.getBumper(Hand.kRight) ? -Reference.ROLLER_SPEED
+        : codriver.getTriggerAxis(Hand.kLeft) > 0.1 ? Reference.ROLLER_SPEED * 0.3
+        : codriver.getTriggerAxis(Hand.kRight) > 0.1 ? -Reference.ROLLER_SPEED * 0.3
         : 0.0);
+        
     }
 
     /** 
@@ -114,5 +122,24 @@ public class Inputs {
             return (getThrottle() > 0 ? 0.4 : 0.25);
             
         } else return 1;
+    }
+
+    /**
+     * Cycles through auto modes
+     * @return boolean
+     */
+    public boolean autoSelector() {
+        if(lastAuto) {
+            if(!driver.getAButton()) {
+                lastAuto = false;
+            }
+        } else {
+            if(driver.getAButton()) {
+                lastAuto = true;
+                return true;
+            }
+        }
+
+        return false;
     }
 }
