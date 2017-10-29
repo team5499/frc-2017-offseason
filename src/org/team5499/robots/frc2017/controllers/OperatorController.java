@@ -39,9 +39,11 @@ public class OperatorController {
         Subsystems.gearmech.setRoller(Subsystems.inputs.getRoller());
         //System.out.println("Z axis: " + Subsystems.accel.getZ());
         
-        if(Subsystems.gearmech.detectGear()) Subsystems.led.flash(Subsystems.led.white);
-        if(Subsystems.inputs.getClimb() > 0.5 || Subsystems.inputs.getClimb() < -0.5) Subsystems.led.rotateColors(200);
-        else Subsystems.led.setRGB(Subsystems.led.off, true, true);
+        if(Subsystems.gearmech.detectGear())
+            Subsystems.led.setRGB(Subsystems.led.white, true, true);
+        else
+            Subsystems.led.setRGB(Subsystems.led.off, true, true);
+        //if(Subsystems.inputs.getClimb() > 0.5 || Subsystems.inputs.getClimb() < -0.5) Subsystems.led.rotateColors(200);
     }
 
     public void changeControlMethod(ControlMethod method) {

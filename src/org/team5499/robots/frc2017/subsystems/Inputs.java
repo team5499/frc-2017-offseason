@@ -30,7 +30,7 @@ public class Inputs {
      * @return Base left side speed
      */
     public double getLeftStick() {
-        System.out.println(driver.getY(Hand.kLeft));
+        //System.out.println(driver.getY(Hand.kLeft));
         return driver.getY(Hand.kLeft);
     }
 
