@@ -87,7 +87,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         autoController.Handle();
-        Subsystems.position.handle();
+        Subsystems.position.Handle(Subsystems.encoders.getLeftDistance(),
+            Subsystems.encoders.getRightDistance(),
+            Subsystems.angle.getAngle());
     }
 
     @Override
@@ -101,6 +103,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         operatorController.Handle();
-        Subsystems.position.handle();
+        Subsystems.position.Handle(Subsystems.encoders.getLeftDistance(),
+            Subsystems.encoders.getRightDistance(),
+            Subsystems.angle.getAngle());
+        
     }
 }
