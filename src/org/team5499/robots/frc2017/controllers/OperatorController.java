@@ -11,7 +11,7 @@ public class OperatorController {
     private static ControlMethod currentControlMethod;
 
     public OperatorController() {
-        currentControlMethod = ControlMethod.CONTROLLER;
+        currentControlMethod = ControlMethod.WHEEL;
     }
 
     public void Start() {

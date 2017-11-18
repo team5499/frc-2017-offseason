@@ -9,24 +9,36 @@ public class Position {
     private double xPosition = 0;
     private double yPosition = 0;
 
-    private double lastTimeLeft;
-    private double lastTimeRight;
-    private double lastTimeAngle;
+    private double lastTimeLeft = 0;
+    private double lastTimeRight = 0;
+    private double lastTimeAngle = 0;
 
     public Position() {}
 
-    public void Handle(final double leftVal, final double rightVal, final double angle) {
+    public void Handle(double leftVal, double rightVal, double angle) {
+        // System.out.println(leftVal + ":" + rightVal + ":" + angle);
         double deltaK = angle - lastTimeAngle;
         double leftDelta = leftVal - lastTimeLeft;
         double rightDelta =  rightVal - lastTimeRight;
-        double a = (rightDelta - leftDelta) / 2;
-        double r = a / deltaK;
+        // System.out.println(leftDelta + ":" + rightDelta + ":" + deltaK);
+        double a = (rightDelta - leftDelta) / 2.0;
+        // System.out.println("A:" + a);
+        
+        double r = 0;
+        if(deltaK != 0) {
+            r = a / deltaK;
+        }
+        // r = a / deltaK;
+
         double deltaX = r * Math.cos(lastTimeAngle - r);
         double deltaY = r * Math.sin(lastTimeAngle);
         double aX = deltaX * Math.cos(lastTimeAngle) + deltaY * Math.sin(lastTimeAngle);
         double aY = deltaY * Math.cos(lastTimeAngle) - deltaX * Math.sin(lastTimeAngle);
         xPosition += aX;
         yPosition += aY;
+        lastTimeLeft = leftVal;
+        lastTimeRight = rightVal;
+        lastTimeAngle = angle;
     }
 
     public void reset() {

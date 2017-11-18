@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
         Subsystems.angle.handle(Subsystems.encoders.getLeftDistance(), Subsystems.encoders.getRightDistance());
         // Handle the state of the LEDs
         //Subsystems.led.handle();
-        System.out.println("X: " + Subsystems.position.getXPosition() + ", Y: " + Subsystems.position.getYPosition());
+        // System.out.println("X: " + Subsystems.position.getXPosition() + ", Y: " + Subsystems.position.getYPosition());
         //System.out.println("Auto mode:" + SmartDashboard.getNumber("automode", 0));
     }
 
@@ -103,9 +103,11 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         operatorController.Handle();
+        Subsystems.angle.handle(Subsystems.encoders.getLeftDistance(), Subsystems.encoders.getRightDistance());
         Subsystems.position.Handle(Subsystems.encoders.getLeftDistance(),
             Subsystems.encoders.getRightDistance(),
             Subsystems.angle.getAngle());
         
+        System.out.println("X: " + + Subsystems.position.getXPosition() + " ,Y: " + Subsystems.position.getYPosition());
     }
 }
