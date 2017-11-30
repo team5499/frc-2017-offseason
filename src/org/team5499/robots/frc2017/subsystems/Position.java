@@ -16,16 +16,18 @@ public class Position {
     public Position() {}
 
     public void Handle(double leftVal, double rightVal, double angle) {
-        // System.out.println(leftVal + ":" + rightVal + ":" + angle);
+        // change in angle between pulses
+        angle = Math.toRadians(angle);
         double deltaK = angle - lastTimeAngle;
+        // change in left encoder distance between pulses
         double leftDelta = leftVal - lastTimeLeft;
+        // change in right encoder distance between pulses
         double rightDelta =  rightVal - lastTimeRight;
-        // System.out.println(leftDelta + ":" + rightDelta + ":" + deltaK);
+        //
         double a = (rightDelta - leftDelta) / 2.0;
-        // System.out.println("A:" + a);
         
         double r = a / deltaK;
-
+        
         double deltaX = r * Math.cos(lastTimeAngle - r);
         double deltaY = r * Math.sin(lastTimeAngle);
         double aX = deltaX * Math.cos(lastTimeAngle) + deltaY * Math.sin(lastTimeAngle);
