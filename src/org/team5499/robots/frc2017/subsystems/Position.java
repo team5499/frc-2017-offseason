@@ -24,11 +24,7 @@ public class Position {
         double a = (rightDelta - leftDelta) / 2.0;
         // System.out.println("A:" + a);
         
-        double r = 0;
-        if(deltaK != 0) {
-            r = a / deltaK;
-        }
-        // r = a / deltaK;
+        double r = a / deltaK;
 
         double deltaX = r * Math.cos(lastTimeAngle - r);
         double deltaY = r * Math.sin(lastTimeAngle);
