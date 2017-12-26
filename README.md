@@ -25,6 +25,14 @@
 * Autos
     * Write code to run auto routine in separate thread
 
+##Deployment System
+The deploy system on the roborio consists of an FTP server and an HTTP server.
+Protocol:
+* Client sends runtime libraries to temporary folder in /home/lvuser/
+* Client sends robot program to /home/lvuser/
+* Client notifies http server that it has deployed
+* Http server moves files into place, and starts the new program
+
 ## Building and Deploying
 1. use `gradle build` or `./gradlew build` to build
 2. use `gradle deploy` or `./gradlew deploy` to deploy

@@ -1,0 +1,24 @@
+#! /bin/bash
+
+# Install python36
+
+# Install pyftpdlib
+
+mkdir tmp_install
+cd tmp_install
+git clone git@github.com:giampaolo/pyftpdlib.git
+scp pyftpdlib admin@roborio-5499-frc.local:~
+ssh admin@roborio-5499-frc.local 'cd pyftpdlib; python3 setup.py install; cd ~; rm -rf pyftpdlib'
+cd ..
+rm -rf tmp_install
+echo "Finished!"
+
+# Set up file structure
+
+ssh admin@roborio-5499-frc.local 'mkdir /home/lvuser/tmp_runtime; '
+
+# Change permissions
+
+# Copy over robotCommand
+
+# Install java?

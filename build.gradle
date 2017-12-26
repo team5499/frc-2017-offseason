@@ -70,25 +70,36 @@ task deploy {
   dependsOn build
   dependsOn runtimeLibraries
   doLast {
-    exec {
-      commandLine 'rsync'
-      args '-c', '-z', '-r', '-v', runtimeLibraries.getTemporaryDir().toPath().resolve('runtimeLibraries').toString() + File.separator, "$RoboRIO_user@$RoboRIO_target:/usr/local/frc/lib"
+    FileCollection runtimeFiles = files { runtimeLibraries.getTemporaryDir().toPath().resolve('runtimeLibraries').toFile().listFiles() }
+    runtimeFiles.each { File file ->
+      exec {
+        commandLine 'curl'
+        args '-u', 'team5499:5499', '-T', file.toPath(), 'ftp://roborio-5499-frc.local:5801/tmp_runtime/'
+      }
     }
     exec {
-      commandLine 'scp'
-      args jar.archivePath, "$RoboRIO_user@$RoboRIO_target:/home/lvuser/FRCUserProgram.jar"
+      commandLine 'curl'
+      args '-u', 'team5499:5499', '-T', jar.archivePath, 'ftp://roborio-5499-frc.local:5801/'
     }
     exec {
-      commandLine 'ssh'
-      args "$RoboRIO_user@$RoboRIO_target", "killall -q netconsole-host || :"
+      commandLine 'curl'
+      args '-d', 'action=deploy', 'http://roborio-5499-frc.local:5800'
     }
-    exec {
-      commandLine 'scp'
-      args "resources/robotCommand", "$RoboRIO_user@$RoboRIO_target:/home/lvuser/robotCommand"
-    }
-    exec {
-      commandLine 'ssh'
-      args "$RoboRIO_user@$RoboRIO_target", ". /etc/profile.d/natinst-path.sh; /usr/local/frc/bin/frcKillRobot.sh -t -r; sync"
-    }
+  }
+}
+
+task deploy_dashboard {
+  Path smartdashboard_path = new File('./SmartDashboard/').toPath();
+  exec {
+    commandLine 'zip'
+    args '-r', getTemporaryDir().toPath().resolve('zip_dir') + '/SmartDashboard.zip', smartdashboard_path.toString()
+  }
+  exec {
+    commandLine 'curl'
+    args '-u', 'team5499:5499', '-T', getTemporaryDir().toPath().resolve('zip_dir') + '/SmartDashboard.zip', 'ftp://roborio-5499-frc.local:5801/'
+  }
+  exec {
+    commandLine 'curl'
+    args '-d', 'action=dashboard', 'http://roborio-5499-frc.local:5800'
   }
 }
