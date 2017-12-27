@@ -1,7 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
+import os
 from os import curdir, sep
 import json
 import urlparse
@@ -53,8 +54,28 @@ class S(BaseHTTPRequestHandler):
 
         if params['action'] == 'deploy':
             print('deploy')
-            deploy_files()
-            deploy_cleanup()
+            ret = deploy_files()
+            if ret > 0:
+                err = {1: 'Failed to remove old runtime libraries',
+                    2: 'Failed to make new lib folder',
+                    3: 'Failed to unzip new libraries',
+                    4: 'Failed to remove zip archive',
+                    5: 'Failed to rename user program'}[ret]
+                self._set_headers('text/html')
+                self.wfile.write(err)
+                return
+            ret = deploy_cleanup()
+            if ret > 0:
+                err = {1: 'natinst-path error',
+                    2: 'frcKillRobot failed',
+                    3: 'sync failed'}[ret]
+                self._set_headers('text/html')
+                self.wfile.write(err)
+                return
+            self._set_headers('text/html')
+            self.wfile.write('Success!')
+            return
+
 
             
             
@@ -74,48 +95,52 @@ def subproc_catch_stderr(args):
     return subproc
 
 def deploy_files():
-    subproc = subproc_catch_stderr(['rm', '-rf', '/usr/local/frc/lib/*'])
+    subproc = subproc_catch_stderr(['rm', '-rf', '/usr/local/frc/lib'])
     if subproc.returncode > 0:
         print('Failed to remove old runtime libraries')
-        return
-    subproc = subproc_catch_stderr(['mv', '~/tmp_runtime/*', '/usr/local/frc/lib/*'])
+        return 1
+    subproc = subproc_catch_stderr(['mkdir', '/usr/local/frc/lib'])
     if subproc.returncode > 0:
-        print('Failed to move new runtime libraries')
-        return
-    subproc = subproc_catch_stderr(['rm', '-rf', '~/tmp_runtime/*'])
+        print('Failed to make new lib folder')
+        return 2
+    subproc = subproc_catch_stderr(['unzip', '/home/lvuser/lib.zip','-d', '/usr/local/frc/lib/'])
     if subproc.returncode > 0:
-        print('Failed to remove temporary runtime libraries')
-        return
-    subproc = subproc_catch_stderr(['rm', '-rf', '/usr/local/frc/lib/*'])
+        print('Failed to unzip new libraries')
+        return 3
+    subproc = subproc_catch_stderr(['rm', '/home/lvuser/lib.zip'])
     if subproc.returncode > 0:
-        print('Failed to remove old runtime libraries')
-        return
+        print('Failed to remove zip archive')
+        return 4
+    subproc = subproc_catch_stderr(['mv', '/home/lvuser/frc-2017-java.jar', '/home/lvuser/FRCUserProgram.jar'])
+    if subproc.returncode > 0:
+        print('Failed to rename user program')
+        return 5
+    return 0
 
 def deploy_cleanup():
     subproc = subproc_catch_stderr(['killall', '-q', 'netconsole-host', '||', ':'])
     if subproc.returncode > 0:
         print('failed to kill netconsole-host')
-        return
-    subproc = subproc_catch_stderr(['.', '/etc/profile.d/natinst-path.sh'])
+    subproc = subproc_catch_stderr(['sh', '/etc/profile.d/natinst-path.sh'])
     if subproc.returncode > 0:
         print('natinst-path error')
-        return
-    subproc = subproc_catch_stderr(['/usr/local/frc/bin/frcKillRobot.sh', '-t', '-r'])
+        return 1
+    subproc = subproc_catch_stderr(['sh', '/usr/local/frc/bin/frcKillRobot.sh', '-t', '-r'])
     if subproc.returncode > 0:
         print('frcKillRobot failed')
-        return
+        return 2
     subproc = subproc_catch_stderr(['sync'])
     if subproc.returncode > 0:
         print('sync failed')
-        return
+        return 3
     print('deploy success!')
-    return
+    return 0
 
         
 def run(server_class=HTTPServer, handler_class=S, port=5800):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print 'Starting httpd...'
+    print('Starting httpd...')
     httpd.serve_forever()
 
 if __name__ == "__main__":

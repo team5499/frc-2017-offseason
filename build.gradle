@@ -65,17 +65,26 @@ task runtimeLibraries {
     }
   }
 }
+
+task zipLibraries(type: Zip, dependsOn: runtimeLibraries) {
+  from runtimeLibraries.getTemporaryDir().toPath().resolve('runtimeLibraries')
+  into file('lib')
+  include '*.*'
+  archiveName 'lib.zip'
+  destinationDir(getTemporaryDir().toPath().resolve('lib_zip').toFile())
+  eachFile { details ->
+     details.setRelativePath(new RelativePath(true, details.getName()))
+  }
+}
    
 task deploy {
   dependsOn build
-  dependsOn runtimeLibraries
+  dependsOn zipLibraries
   doLast {
-    FileCollection runtimeFiles = files { runtimeLibraries.getTemporaryDir().toPath().resolve('runtimeLibraries').toFile().listFiles() }
-    runtimeFiles.each { File file ->
-      exec {
-        commandLine 'curl'
-        args '-u', 'team5499:5499', '-T', file.toPath(), 'ftp://roborio-5499-frc.local:5801/tmp_runtime/'
-      }
+    println zipLibraries.getTemporaryDir().toPath().resolve('lib_zip').toAbsolutePath().toString() + "/lib.zip"
+    exec {
+      commandLine 'curl'
+      args '-u', 'team5499:5499', '-T', zipLibraries.getTemporaryDir().toPath().resolve('lib_zip').toAbsolutePath().toString() + "/lib.zip", 'ftp://roborio-5499-frc.local:5801/'
     }
     exec {
       commandLine 'curl'
@@ -88,18 +97,32 @@ task deploy {
   }
 }
 
-task deploy_dashboard {
-  Path smartdashboard_path = new File('./SmartDashboard/').toPath();
-  exec {
-    commandLine 'zip'
-    args '-r', getTemporaryDir().toPath().resolve('zip_dir') + '/SmartDashboard.zip', smartdashboard_path.toString()
-  }
-  exec {
-    commandLine 'curl'
-    args '-u', 'team5499:5499', '-T', getTemporaryDir().toPath().resolve('zip_dir') + '/SmartDashboard.zip', 'ftp://roborio-5499-frc.local:5801/'
-  }
-  exec {
-    commandLine 'curl'
-    args '-d', 'action=dashboard', 'http://roborio-5499-frc.local:5800'
+// DO NOT USE -- STILL UNDER DEVELOPMENT
+
+task zipDashboard(type: Zip) {
+  from file('./')
+  into file('SmartDashboard')
+  include 'SmartDashboard/'
+  archiveName 'SmartDashboard.zip'
+  destinationDir(file('./SmartDashboard_new/'))
+  //THIS HAS TO CHANGE TO PREVENT FROM FLATTENING THE DIRECTORY STRUCTURE
+  eachFile { details ->
+     details.setRelativePath(new RelativePath(true, details.getName()))
   }
 }
+
+task deploy_dashboard {
+  dependsOn zipDashboard
+  doLast {
+    exec {
+      commandLine 'curl'
+      args '-u', 'team5499:5499', '-T', getTemporaryDir().toPath().resolve('zip_dir') + '/SmartDashboard.zip', 'ftp://roborio-5499-frc.local:5801/'
+    }
+    exec {
+      commandLine 'curl'
+      args '-d', 'action=dashboard', 'http://roborio-5499-frc.local:5800'
+    }
+  }
+}
+
+//--------------------------------------------------------------

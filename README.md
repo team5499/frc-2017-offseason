@@ -36,6 +36,7 @@ Protocol:
 ## Building and Deploying
 1. use `gradle build` or `./gradlew build` to build
 2. use `gradle deploy` or `./gradlew deploy` to deploy
+3. use `doxygen Doxyfile` to build the documentation
 
 
 ## Smart Dashboard
